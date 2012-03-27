@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# (c) 2012 YeaSoft Int'l - Leo Moll
+#
+# This initramfs hook implements conditional copy of the loop squashfs
+# into the initrd if supplied.
+
+PREREQ=""
+
+prereqs()
+{
+	echo "$PREREQ"
+}
+
+case $1 in
+# get pre-requisites
+prereqs)
+	prereqs
+	exit 0
+	;;
+esac
+
+. /usr/share/initramfs-tools/hook-functions
+
+if [ -e /netpoldo.squashfs ]; then
+	copy_exec /netpoldo.squashfs
+fi

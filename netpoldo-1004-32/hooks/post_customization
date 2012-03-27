@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# (c) 2012 YeaSoft Int'l - Leo Moll
+#
+# uic hook:	post_customization
+# called by:	uic_create, uic_build
+#
+# This hook will be called by several commands after making any customizations
+# (file copies and deletions) to the installation environment in $TARGET
+
+
+T_NOW=$(date +"%Y-%m-%d %H:%M %z")
+case "$UIC_ARCH" in
+"i386")		T_ARCH="32";;
+"amd64")	T_ARCH="64";;
+"")		T_ARCH="";;
+*)		T_ARCH="-$UIC_ARCH";;
+esac
+
+
+(
+cat <<EOF
+
+YeaSoft NetPoldo${T_ARCH} Ubuntu ${UIC_SRCVERSION} Rescue System - \n via \l
+
+Created from Ubuntu (${UIC_RELEASE}) on ${T_NOW} using
+ - UIC (Ubuntu Installation Creator) ${VERSION}
+ - ${UIC_SRCNAME} ${UIC_SRCVERSION} uic template
+
+EOF
+)> "${TARGET}/chroot/etc/issue"
+
+
+(
+cat <<EOF
+
+YeaSoft NetPoldo${T_ARCH} Ubuntu $UIC_SRCVERSION Rescue System - netpoldo${T_ARCH} via ssh
+
+Created from Ubuntu (${UIC_RELEASE}) on ${T_NOW} using
+ - UIC (Ubuntu Installation Creator) ${VERSION}
+ - ${UIC_SRCNAME} ${UIC_SRCVERSION} uic template
+
+EOF
+)> "${TARGET}/chroot/etc/issue.net"
