@@ -124,11 +124,11 @@ for x in $(cat /proc/cmdline); do
 done
 [ "$quiet" != "y" ] && log_end_msg
 
-[ "$quiet" != "y" ] && log_begin_msg "Loading filesystem drivers..."
-modprobe loop
-modprobe squashfs
-modprobe aufs
-[ "$quiet" != "y" ] && log_end_msg
+# [ "$quiet" != "y" ] && log_begin_msg "Loading filesystem drivers..."
+# modprobe loop
+# modprobe squashfs
+# modprobe aufs
+# [ "$quiet" != "y" ] && log_end_msg
 
 if [ "$BRANCH" ]; then
 	# Get the branch filesystem type if not set
@@ -154,6 +154,9 @@ if [ "$BRANCH" ]; then
 	mount -o move ${rootmnt} /union/ro
 	[ "$quiet" != "y" ] && log_end_msg
 
+	[ "$quiet" != "y" ] && log_begin_msg "Loading filesystem drivers..."
+	modprobe aufs
+	[ "$quiet" != "y" ] && log_end_msg
 
 	[ "$quiet" != "y" ] && log_begin_msg "Merging filesystem..."
 	mount -t aufs -o br:/union/rw${BRANCHRWPATH}:/union/ro${BRANCHROPATH} none ${rootmnt}
@@ -167,7 +170,12 @@ if [ "$BRANCH" ]; then
 	mount -o move /union/ro ${rootmnt}/root/.union/ro
 	mount -o move /union/rw ${rootmnt}/root/.union/rw
 	[ "$quiet" != "y" ] && log_end_msg
+
 fi
+
+# disable autostart of ethernet adaptors
+sed -e "s/auto eth/# auto eth/g" < ${rootmnt}/etc/network/interfaces > /interfaces
+mv /interfaces ${rootmnt}/etc/network/interfaces
 
 unset BRANCH
 unset BRANCHFLAGS

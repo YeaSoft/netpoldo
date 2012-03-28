@@ -9,36 +9,10 @@
 # (file copies and deletions) to the installation environment in $TARGET
 
 
-T_NOW=$(date +"%Y-%m-%d %H:%M %z")
-case "$UIC_ARCH" in
-"i386")		T_ARCH="32";;
-"amd64")	T_ARCH="64";;
-"")		T_ARCH="";;
-*)		T_ARCH="-$UIC_ARCH";;
-esac
+# copy the configuration file to the destination file system but remove the array
+# definitions since they are not compatible with /bin/sh
+sed -e "s/^UIC_TARGET.*//g" <  "${TARGET}/uic.conf" > "${TARGET}/chroot/etc/uic.conf"
 
-
-(
-cat <<EOF
-
-YeaSoft NetPoldo${T_ARCH} Ubuntu ${UIC_SRCVERSION} Rescue System - \n via \l
-
-Created from Ubuntu (${UIC_RELEASE}) on ${T_NOW} using
- - UIC (Ubuntu Installation Creator) ${VERSION}
- - ${UIC_SRCNAME} ${UIC_SRCVERSION} uic template
-
-EOF
-)> "${TARGET}/chroot/etc/issue"
-
-
-(
-cat <<EOF
-
-YeaSoft NetPoldo${T_ARCH} Ubuntu $UIC_SRCVERSION Rescue System - netpoldo${T_ARCH} via ssh
-
-Created from Ubuntu (${UIC_RELEASE}) on ${T_NOW} using
- - UIC (Ubuntu Installation Creator) ${VERSION}
- - ${UIC_SRCNAME} ${UIC_SRCVERSION} uic template
-
-EOF
-)> "${TARGET}/chroot/etc/issue.net"
+# add some more information
+echo "UIC_CREATION_TIMESTAMP=\"$(date +'%Y-%m-%d %H:%M %z')\"" >> "${TARGET}/chroot/etc/uic.conf"
+echo "UIC_CREATION_VERSION=\"${VERSION}\"" >> "${TARGET}/chroot/etc/uic.conf"
