@@ -1,0 +1,13 @@
+vmlinuz
+initrd.img
+boot/*
+var/backup/*
+var/cache/debconf/config.dat-old
+var/cache/debconf/templates.dat-old
+var/lib/dhcp3/*
+var/lib/ntpdate/*
+var/lib/initramfs-tools/*
+usr/lib/initramfs-tool*
+usr/share/initramfs-tools/*
+etc/initramfs-tools/*
+tmp/*

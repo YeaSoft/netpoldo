@@ -1,0 +1,46 @@
+# netpoldo life filesystem mounting			-*- shell-script -*-
+
+# Parameter: Where to mount the filesystem
+mountroot ()
+{
+	[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/netpoldo-top"
+	run_scripts /scripts/netpoldo-top
+	[ "$quiet" != "y" ] && log_end_msg
+
+	[ "$quiet" != "y" ] && log_begin_msg "Loading filesystem drivers..."
+	modprobe -Qb loop
+	modprobe -Qb squashfs
+	modprobe -Qb aufs
+	[ "$quiet" != "y" ] && log_end_msg
+
+	[ "$quiet" != "y" ] && log_begin_msg "Creating filesystem prerequisites..."
+	mknod /dev/loop0 b 7 0
+	mkdir -p /union/ro
+	mkdir -p /union/rw
+	[ "$quiet" != "y" ] && log_end_msg
+
+
+	[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/netpoldo-premount"
+	run_scripts /scripts/netpoldo-premount
+	[ "$quiet" != "y" ] && log_end_msg
+
+	[ "$quiet" != "y" ] && log_begin_msg "Mounting root filesystem..."
+	mount -t tmpfs tmpfs /union/rw
+	mount -t squashfs -o loop /netpoldo.squashfs /union/ro
+#	mount -t unionfs  -o dirs=/root-ram=rw:/root-org=ro unionfs ${rootmnt}
+	mount -t aufs     -o br:/union/rw:/union/ro none ${rootmnt}
+	mountroot_status="$?"
+	[ "$quiet" != "y" ] && log_end_msg
+
+	[ "$quiet" != "y" ] && log_begin_msg "Create working shadows..."
+	mkdir -p ${rootmnt}/root/.union/ro
+	mkdir -p ${rootmnt}/root/.union/rw
+	mount -o move /union/ro ${rootmnt}/root/.union/ro
+	mount -o move /union/rw ${rootmnt}/root/.union/rw
+	[ "$quiet" != "y" ] && log_end_msg
+
+
+	[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/netpoldo-bottom"
+	run_scripts /scripts/netpoldo-bottom
+	[ "$quiet" != "y" ] && log_end_msg
+}
