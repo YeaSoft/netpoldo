@@ -17,3 +17,16 @@ service portmap stop > /dev/null 2> /dev/null
 service idmapd stop > /dev/null 2> /dev/null
 # reset the error code to no error
 ls > /dev/null
+
+# fix the ugly bug with absolute initrd.img link on ubuntu precise
+if [ -e "/initrd.img" ]; then
+	LINKPATH=$(readlink "/initrd.img")
+	if [ "${LINKPATH:0:1}" = "/" ]; then
+		show_verbose 1 "Fixing wrong absolute symbolic link to initrd.img"
+		# oh yea! It's a f...... absolute link....
+		rm "/initrd.img"
+		ln -s "${LINKPATH:1}" "/initrd.img"
+	fi
+fi
+
+
