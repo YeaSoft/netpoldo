@@ -11,11 +11,11 @@
 
 # copy the configuration file to the destination file system but remove the array
 # definitions since they are not compatible with /bin/sh
-sed -e "s/^UIC_TARGET.*/# DELETEME/g" <  "${TARGET}/uic.conf" | grep -v "^# DELETEME" > "${TARGET}/chroot/etc/uic.conf"
+sed -e "s/^UIC_TARGET.*/# DELETEME/g" <  "${TARGET}/uictpl.conf" | grep -v "^# DELETEME" > "${TARGET}/chroot/etc/uictpl.conf"
 
 # add some more information
-echo "UIC_CREATION_TIMESTAMP=\"$(date +'%Y-%m-%d %H:%M %z')\"" >> "${TARGET}/chroot/etc/uic.conf"
-echo "UIC_CREATION_VERSION=\"${VERSION}\"" >> "${TARGET}/chroot/etc/uic.conf"
+echo "UIC_CREATION_TIMESTAMP=\"$(date +'%Y-%m-%d %H:%M %z')\"" >> "${TARGET}/chroot/etc/uictpl.conf"
+echo "UIC_CREATION_VERSION=\"${VERSION}\"" >> "${TARGET}/chroot/etc/uictpl.conf"
 
 # rewrite the /etc/motd.tail
 echo > "${TARGET}/chroot/etc/motd.tail"
