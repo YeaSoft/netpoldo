@@ -1,0 +1,57 @@
+# internal filesystem mounting			-*- shell-script -*-
+
+# Parameter: Where to mount the filesystem
+mountroot ()
+{
+	[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/local-top"
+	run_scripts /scripts/local-top
+	[ "$quiet" != "y" ] && log_end_msg
+
+	[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/local-premount"
+	run_scripts /scripts/local-premount
+	[ "$quiet" != "y" ] && log_end_msg
+
+
+	if [ -z "$LOOP" ]; then
+		panic "
+Could not mount the root filesystem.
+The internal boot method requires a loop file system to be present in the
+initial ramdisk.
+"
+	fi
+
+	if [ "$LOOP" ]; then
+
+		while [ ! -e "/${LOOP#/}" ]; do
+			panic "ALERT!  /${LOOP#/} does not exist.  Dropping to a shell!"
+		done
+
+		# Get the loop filesystem type if not set
+		if [ -z "${LOOPFSTYPE}" ]; then
+			eval $(fstype < "/${LOOP#/}")
+		else
+			FSTYPE="${LOOPFSTYPE}"
+		fi
+		if [ "$FSTYPE" = "unknown" ] && [ -x /sbin/blkid ]; then
+			FSTYPE=$(/sbin/blkid -s TYPE -o value "/${LOOP#/}")
+			[ -z "$FSTYPE" ] && FSTYPE="unknown"
+		fi
+
+		if [ ${readonly} = y ]; then
+			roflag=-r
+		else
+			roflag=-w
+		fi
+
+		# FIXME This has no error checking
+		modprobe loop
+		modprobe ${FSTYPE}
+
+		# FIXME This has no error checking
+		mount ${roflag} -o loop -t ${FSTYPE} ${LOOPFLAGS} "/${LOOP#/}" ${rootmnt}
+	fi
+
+	[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/local-bottom"
+	run_scripts /scripts/local-bottom
+	[ "$quiet" != "y" ] && log_end_msg
+}
