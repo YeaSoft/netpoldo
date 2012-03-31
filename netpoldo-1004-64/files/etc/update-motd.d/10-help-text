@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. /etc/uic.conf
+. /etc/uictpl.conf
 
 echo
 echo "Welcome to YeaSoft NetPoldo Ubuntu ${UIC_SRCVERSION} Rescue System!"
