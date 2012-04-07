@@ -1,0 +1,50 @@
+==============================================================================
+Release Notes - NetPoldo Ubuntu Rescue System - Version 39          2012-03-31
+==============================================================================
+
+
+Memory Impact
+-------------
+
+The following memory usage values have been determined immediately after boot
+based on the selected NetPoldo version and used initial ramdisk.
+
+
+Version            | Local  | Integrated | Net    | Casper
+===================+========+============+========+========
+Ubuntu 8.04-x86    |  61,6M |     118,8M |        |  n/a
+-------------------+--------+------------+--------+--------
+Ubuntu 8.04-amd64  |  78,8M |     135,9M |        |  n/a
+-------------------+--------+------------+--------+--------
+Ubuntu 10.04-x86   |        |            |        |  n/a
+-------------------+--------+------------+--------+--------
+Ubuntu 10.04-amd64 |        |            |        |  n/a
+-------------------+--------+------------+--------+--------
+Ubuntu 12.04-x86   |        |            |        |  n/a
+-------------------+--------+------------+--------+--------
+Ubuntu 12.04-amd64 |        |            |        |  n/a
+-------------------+--------+------------+--------+--------
+
+The following method was used:
+
+  echo $(($(grep MemTotal /proc/meminfo | awk '{print $2}') - \
+    $(grep MemFree /proc/meminfo | awk '{print $2}') ))
+
+
+Included Software
+-----------------
+
+In addition to the minimal system (ubuntu-minimal), the following additional
+packagets are included in this version of NetPoldo:
+
+ * Connectivity and Usability
+   + ssh
+   + nano
+   + screen
+
+ * File Systems
+   + nfs-common
+
+ * File System and Volume Tools
+   + mdadm
+   + squashfs-tools
