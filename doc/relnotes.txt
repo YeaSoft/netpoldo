@@ -2,6 +2,48 @@
 Release Notes - NetPoldo Ubuntu Rescue System - Version 39          2012-03-31
 ==============================================================================
 
+* Release Scope
+* Included Software
+* Memory Impact
+* Known Problems
+
+Release Scope
+-------------
+This is the first experimental release of NetPoldo. In this version it
+contains only a minimal catalog of included software. The next releases will
+show which software should be included. This should not be a serious problem
+for the user, since it is at any time possible to install software in the live
+system during a session by using the standard way:
+
+	apt-get update
+	apt-get install <package>
+
+Issuing apt-get update is important, since the live filesystem does not
+contain any package source listing in order to save as much as possible
+memory.
+
+The deliveries of this version include only the ubuntu based version for
+8.04, 10.04 and the beta of 12.04 bot amd64 and x86.
+
+
+Included Software
+-----------------
+
+In addition to the minimal system (ubuntu-minimal), the following additional
+packagets are included in this version of NetPoldo:
+
+ * Connectivity and Usability
+   + ssh
+   + nano
+   + screen
+
+ * File Systems
+   + nfs-common
+
+ * File System and Volume Tools
+   + mdadm
+   + squashfs-tools
+
 
 Memory Impact
 -------------
@@ -31,20 +73,13 @@ The following method was used:
     $(grep MemFree /proc/meminfo | awk '{print $2}') ))
 
 
-Included Software
------------------
+Known Problems
+--------------
 
-In addition to the minimal system (ubuntu-minimal), the following additional
-packagets are included in this version of NetPoldo:
+Since the current Version of NetPoldo is not able to determine the boot media from
+within the local initial ramdisc, a deployment of NetPoldo on removable media like
+cdroms or USB sticks is possible only with the integrated version.
 
- * Connectivity and Usability
-   + ssh
-   + nano
-   + screen
-
- * File Systems
-   + nfs-common
-
- * File System and Volume Tools
-   + mdadm
-   + squashfs-tools
+The next version of NetPoldo will solve that problem in the local version of the
+initial ramdisc. In addtion it is planned to deliver also an initial ramdisc
+based on casper.
