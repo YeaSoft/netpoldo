@@ -45,26 +45,26 @@ packagets are included in this version of NetPoldo:
    + squashfs-tools
 
 
-Memory Impact
--------------
+Memory Usage
+------------
 
-The following memory usage values have been determined immediately after boot
-based on the selected NetPoldo version and used initial ramdisk.
+The following memory usage values have been determined approximatively one
+minute after completion of the boot process based on the selected NetPoldo
 
 
 Version            | Local  | Integrated | Net    | Casper
 ===================+========+============+========+========
-Ubuntu 8.04-x86    |  61,6M |     118,8M |        |  n/a
+Ubuntu 8.04-x86    |  61,6M |     118,8M | broken |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 8.04-amd64  |  78,8M |     135,9M |        |  n/a
+Ubuntu 8.04-amd64  |  78,8M |     135,9M | broken |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 10.04-x86   |        |            |        |  n/a
+Ubuntu 10.04-x86   |  69,9M |     153,8M |  71,4M |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 10.04-amd64 |        |            |        |  n/a
+Ubuntu 10.04-amd64 | 103,1M |     187,9M | 107,1M |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 12.04-x86   |        |            |        |  n/a
+Ubuntu 12.04-x86   |  79,6M |     172,9M |  79,2M |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 12.04-amd64 |        |            |        |  n/a
+Ubuntu 12.04-amd64 | 104,6M |     199,9M | 109,9M |  n/a
 -------------------+--------+------------+--------+--------
 
 The following method was used:
