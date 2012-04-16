@@ -1,5 +1,5 @@
 ==============================================================================
-NetPoldo Ubuntu Rescue System - Version 39
+NetPoldo Ubuntu Rescue System - Version 41
 ==============================================================================
 
      NetPoldo is a lightweight Ubuntu system intended for rescue,
@@ -222,13 +222,15 @@ loop=<root filesystem image file> compressed root filesystem image. Depending
                                   This option sets the device for the
                                   filesystem where the compressed root
                                   filesystem image is located. It can be a
-                                  physical filesystem formatted with ext2, ext3
-                                  or any filesystem supported by the initial
-                                  ramdisk or an NFS mount (use /dev/nfs to
-root=<root fs device>             specify the NFS mount). It is permitted to
-                                  reference the device by device name (e.g. /
-                                  dev/sda1), by volume label (e.g. LABEL=boot-
-                                  disk) and by unique volume id (e.g.
+                                  physical filesystem formatted with ext2,
+                                  ext3, any filesystem supported by the initial
+                                  ramdisk, an NFS mount (use /dev/nfs to
+root=<root fs device>             specify the NFS mount) or autodetection of a
+                                  local or removable device (use /dev/detect).
+                                  It is permitted to reference the device by
+                                  device name (e.g. /dev/sda1), by volume label
+                                  (e.g. LABEL=boot-disk) and by unique volume
+                                  id (e.g.
                                   UUID=f5a49b89-e8c7-448a-a920-ae0aaac53b7b)
                                   Depending upon the intial ramdisk image, this
                                   parameter may be optional or not. See below.

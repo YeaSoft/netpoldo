@@ -1,29 +1,41 @@
 ==============================================================================
-Release Notes - NetPoldo Ubuntu Rescue System - Version 39          2012-03-31
+Release Notes - NetPoldo Ubuntu Rescue System - Version 41          2012-04-15
 ==============================================================================
 
 * Release Scope
+* What's New
 * Included Software
 * Memory Impact
 * Known Problems
+* Release History
 
 Release Scope
 -------------
-This is the first experimental release of NetPoldo. In this version it
-contains only a minimal catalog of included software. The next releases will
-show which software should be included. This should not be a serious problem
-for the user, since it is at any time possible to install software in the live
-system during a session by using the standard way:
+This is the second experimental release of NetPoldo. This version solves the
+autodetection problem for removable devices making NetPoldo usable also for
+deployment on removable devices with the local-root initial ramdisk.
+Also this version contains a very reduced catalog of included software since
+up to now no final decision has been taken about the catalog of included
+software. Nevertheless the user is able to install software in the live
+system after booting by using the standard means of ubuntu:
 
 	apt-get update
 	apt-get install <package>
 
-Issuing apt-get update is important, since the live filesystem does not
+Issuing apt-get update is mandatory, since the live filesystem does not
 contain any package source listing in order to save as much as possible
 memory.
 
 The deliveries of this version include only the ubuntu based version for
-8.04, 10.04 and the beta of 12.04 bot amd64 and x86.
+8.04, 10.04 and the beta of 12.04 both for amd64 and x86.
+
+
+What's new
+----------
+ * Support for autodetection of the device with the filesystem containing
+   the compressed root filesystem. Autodetection is enabled by specifying
+   root=/dev/detect on the kernel commandline
+ * New tool memused
 
 
 Included Software
@@ -39,10 +51,19 @@ packagets are included in this version of NetPoldo:
 
  * File Systems
    + nfs-common
+   + ntfs-3g
+   + sshfs
 
  * File System and Volume Tools
    + mdadm
    + squashfs-tools
+   + open-iscsi
+   + parted
+   + partimage (*)
+
+
+(*) not included in netpoldo-1004-64 because the package partimage is not
+    available for amd64 in this version of ubuntu
 
 
 Memory Usage
@@ -76,10 +97,18 @@ The following method was used:
 Known Problems
 --------------
 
-Since the current Version of NetPoldo is not able to determine the boot media from
-within the local initial ramdisc, a deployment of NetPoldo on removable media like
-cdroms or USB sticks is possible only with the integrated version.
+The 08.04 version of NetPoldo is still not able to mount the compressed root
+file system from an NFS drive.
 
-The next version of NetPoldo will solve that problem in the local version of the
-initial ramdisc. In addtion it is planned to deliver also an initial ramdisc
-based on casper.
+At now there are no known issues with the current shipped configurations. In
+order to satisfy the need of the extended functionality of some users, it is
+planned to deliver also an initial ramdisc based on casper.
+
+
+Release History
+---------------
+
+Version 39 released on 2012-03-15
+
+ * First public release containing the ubuntu based versions of
+   8.04, 10.04 and the beta of 12.04 both for amd64 and x86.

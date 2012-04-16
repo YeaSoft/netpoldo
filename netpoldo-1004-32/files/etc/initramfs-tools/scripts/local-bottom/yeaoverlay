@@ -4,6 +4,8 @@
 #
 # This initramfs script implements support for branch filesystem
 # in local rootfs environments.
+# This part is executed at the END of the "local" root mount
+# operation
 
 PREREQ=""
 prereqs()
@@ -21,7 +23,7 @@ esac
 
 . ./scripts/functions
 
-log_begin_msg "Parsing overlay specific parameters..."
+[ "$quiet" != "y" ] && log_begin_msg "Parsing overlay specific parameters..."
 # Parse command line options
 for x in $(cat /proc/cmdline); do
         case $x in
@@ -81,7 +83,7 @@ for x in $(cat /proc/cmdline); do
 		;;
 	esac
 done
-log_end_msg
+[ "$quiet" != "y" ] && log_end_msg
 
 [ "$quiet" != "y" ] && log_begin_msg "Loading filesystem drivers..."
 modprobe loop
