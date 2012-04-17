@@ -1,5 +1,5 @@
 ==============================================================================
-Release Notes - NetPoldo Ubuntu Rescue System - Version 41          2012-04-15
+Release Notes - NetPoldo Ubuntu Rescue System - Version 41          2012-04-17
 ==============================================================================
 
 * Release Scope
@@ -75,17 +75,17 @@ minute after completion of the boot process based on the selected NetPoldo
 
 Version            | Local  | Integrated | Net    | Casper
 ===================+========+============+========+========
-Ubuntu 8.04-x86    |  61,6M |     118,8M | broken |  n/a
+Ubuntu 8.04-x86    |  65.4M |     123.7M |  60.2M |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 8.04-amd64  |  78,8M |     135,9M | broken |  n/a
+Ubuntu 8.04-amd64  |  82.7M |     141.0M |  78.1M |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 10.04-x86   |  69,9M |     153,8M |  71,4M |  n/a
+Ubuntu 10.04-x86   |  75.7M |     158.8M |  75.2M |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 10.04-amd64 | 103,1M |     187,9M | 107,1M |  n/a
+Ubuntu 10.04-amd64 | 108.7M |     192.8M | 107.5M |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 12.04-x86   |  79,6M |     172,9M |  79,2M |  n/a
+Ubuntu 12.04-x86   |  84.7M |     173.9M |  95.1M |  n/a
 -------------------+--------+------------+--------+--------
-Ubuntu 12.04-amd64 | 104,6M |     199,9M | 109,9M |  n/a
+Ubuntu 12.04-amd64 | 117.6M |     209.0M | 118.7M |  n/a
 -------------------+--------+------------+--------+--------
 
 The following method was used:
@@ -97,18 +97,15 @@ The following method was used:
 Known Problems
 --------------
 
-The 08.04 version of NetPoldo is still not able to mount the compressed root
-file system from an NFS drive.
-
 At now there are no known issues with the current shipped configurations. In
-order to satisfy the need of the extended functionality of some users, it is
-planned to deliver also an initial ramdisc based on casper.
+order to satisfy the need of the extended functionality of some users, an
+initial ramdisc based on casper i splanned for the next releases.
 
 
 Release History
 ---------------
 
-Version 39 released on 2012-03-15
+Version 39 released on 2012-03-31
 
  * First public release containing the ubuntu based versions of
    8.04, 10.04 and the beta of 12.04 both for amd64 and x86.

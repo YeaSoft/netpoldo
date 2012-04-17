@@ -1,0 +1,120 @@
+#!/bin/bash
+
+#####################
+# Internal Variables
+# generic script helpers
+SCRIPTNAME=$(basename $0)
+SCRIPTPATH=$(expr match "$0" '\(.*\)'\/$SCRIPTNAME)
+DESTPATH=${SCRIPTPATH}/..
+
+function create_iso {
+	mkdir isotemp
+	mkdir isotemp/isolinux
+	mkdir isotemp/memtest
+
+	cp /usr/lib/syslinux/isolinux.bin			isotemp/isolinux
+	cp /usr/lib/syslinux/menu.c32				isotemp/isolinux
+	cp ${SCRIPTPATH}/textmode.conf				isotemp/isolinux
+	cp ${SCRIPTPATH}/memtest86+-4.20.bin			isotemp/memtest/memtest.bin
+	ln -s $(pwd)/boot/netpoldo-${1}				isotemp/netpoldo
+	(
+	cat <<EOF
+DEFAULT			menu.c32
+PROMPT			0
+TIMEOUT			50
+ONTIMEOUT		l0
+
+MENU INCLUDE		textmode.conf
+MENU TITLE		YeaSoft NetPoldo Ubuntu Rescue System ${2}
+MENU AUTOBOOT		Starting local system in # second{,s}
+
+EOF
+	) > isotemp/isolinux/isolinux.cfg
+
+	sed -e "s/netpoldo-"${1}"/netpoldo/g" < ${SCRIPTPATH}/netpoldo-${1}.menu >> isotemp/isolinux/isolinux.cfg
+
+	(
+	cat <<EOF
+
+MENU SEPARATOR
+
+LABEL memtest
+	MENU LABEL      ^Memory Failure Detection (memtest86+)
+	TEXT HELP
+ * version: 4.20, (C) 2011, Samuel DEMEULEMEESTER
+ * http://www.memtest.org
+ * Deep Memory Tester
+	ENDTEXT
+	KERNEL          /memtest/memtest.bin
+
+
+EOF
+	) >> isotemp/isolinux/isolinux.cfg
+
+
+	mkisofs -o ${DESTPATH}/netpoldo-ubuntu-${2}.iso \
+		-V "NetPoldo ${NP_VERSION}" \
+		-b isolinux/isolinux.bin \
+		-c isolinux/boot.cat \
+		-no-emul-boot \
+		-boot-load-size 4 \
+		-boot-info-table \
+		-f \
+		-r -J -max-iso9660-filenames -udf \
+		isotemp
+
+
+	rm -rf isotemp
+	touch --reference boot/netpoldo-${1}/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-${2}.iso
+}
+
+function make_delivery() {
+	echo Creating delivery area boot/netpoldo-${1}
+
+	mkdir -p boot/netpoldo-${1}/i386/pxelinux.cfg
+	mkdir -p boot/netpoldo-${1}/amd64/pxelinux.cfg
+
+	echo "DEFAULT netpoldo.vmlinuz initrd=netpoldo.initrdi keyboard=us password=password" > boot/netpoldo-${1}/i386/pxelinux.cfg/default
+	echo "DEFAULT netpoldo.vmlinuz initrd=netpoldo.initrdi keyboard=us password=password" > boot/netpoldo-${1}/amd64/pxelinux.cfg/default
+	cp -a /usr/lib/syslinux/pxelinux.0			boot/netpoldo-${1}/i386
+	cp -a /usr/lib/syslinux/pxelinux.0			boot/netpoldo-${1}/amd64
+	cp -a ${DESTPATH}/doc/*					boot/netpoldo-${1}
+	cp -a ${DESTPATH}/netpoldo-${1}-32/output/*		boot/netpoldo-${1}/i386
+	cp -a ${DESTPATH}/netpoldo-${1}-64/output/*		boot/netpoldo-${1}/amd64
+}
+
+function kill_delivery() {
+	rm -rf boot/netpoldo-${1}
+}
+
+
+NP_VERSION=41
+
+# prepare the delivery area
+make_delivery 0804
+make_delivery 1004
+make_delivery 1204
+
+tar -cvzf ${DESTPATH}/netpoldo-ubuntu-08.04.4-${NP_VERSION}-i386.tar.gz -C boot --exclude amd64 netpoldo-0804
+touch --reference boot/netpoldo-0804/i386/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-08.04.4-${NP_VERSION}-i386.tar.gz
+tar -cvzf ${DESTPATH}/netpoldo-ubuntu-08.04.4-${NP_VERSION}-amd64.tar.gz -C boot --exclude i386 netpoldo-0804
+touch --reference boot/netpoldo-0804/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-08.04.4-${NP_VERSION}-amd64.tar.gz
+create_iso 0804 08.04.4-${NP_VERSION}
+
+tar -cvzf ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-i386.tar.gz -C boot --exclude amd64 netpoldo-1004
+touch --reference boot/netpoldo-1004/i386/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-i386.tar.gz
+tar -cvzf ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-amd64.tar.gz -C boot --exclude i386 netpoldo-1004
+touch --reference boot/netpoldo-1004/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-amd64.tar.gz
+create_iso 1004 10.04.4-${NP_VERSION} sr0
+
+tar -cvzf ${DESTPATH}/netpoldo-ubuntu-12.04.B-${NP_VERSION}-i386.tar.gz -C boot --exclude amd64 netpoldo-1204
+touch --reference boot/netpoldo-1204/i386/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-12.04.B-${NP_VERSION}-i386.tar.gz
+tar -cvzf ${DESTPATH}/netpoldo-ubuntu-12.04.B-${NP_VERSION}-amd64.tar.gz -C boot --exclude i386 netpoldo-1204
+touch --reference boot/netpoldo-1204/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-12.04.B-${NP_VERSION}-amd64.tar.gz
+create_iso 1204 12.04.4-${NP_VERSION}
+
+kill_delivery 1204
+kill_delivery 1004
+kill_delivery 0804
+
+rmdir boot
