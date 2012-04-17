@@ -275,15 +275,29 @@ Boots NetPoldo with default settings (US Keyboard, root password="password",
 non persistent storage) from a physical volume with syslinux or PXE via TFTP
 
 
-Boot from local volume
-----------------------
+Boot from removable volume
+--------------------------
 
 KERNEL  /netpoldo-1004/i386/netpoldo.vmlinuz
-APPEND  initrd=/netpoldo-1004/i386/netpoldo.initrd root=LABEL=netpoldo-stick \
+APPEND  initrd=/netpoldo-1004/i386/netpoldo.initrd root=/dev/detect \
         loop=/netpoldo-1004/i386/netpoldo.squashfs branch=/dev/ram \
         password="aBRAcadaBRA"
 
-Boots NetPoldo from the device with the volume name netpoldo-stick where all
+Boots NetPoldo from a removable device where all files of NetPoldo are located
+in the directory /netpoldo-1004/i386/. All writes are done in the ramdisk, so
+there is no persistent storage. The password of the user root is set
+to aBRAcadaBRA
+
+
+Boot from local known volume
+----------------------------
+
+KERNEL  /netpoldo-1004/i386/netpoldo.vmlinuz
+APPEND  initrd=/netpoldo-1004/i386/netpoldo.initrd root=LABEL=workstation-boot \
+        loop=/netpoldo-1004/i386/netpoldo.squashfs branch=/dev/ram \
+        password="aBRAcadaBRA"
+
+Boots NetPoldo from the device with the volume name workstation-boot where all
 files of NetPoldo are located in the directory /netpoldo-1004/i386/. All writes
 are done in the ramdisk, so there is no persistent storage. The password of the
 user root is set to aBRAcadaBRA
