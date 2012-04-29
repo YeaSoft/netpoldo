@@ -1,5 +1,5 @@
 ==============================================================================
-Release Notes - NetPoldo Ubuntu Rescue System - Version 41          2012-04-17
+Release Notes - NetPoldo Ubuntu Rescue System - Version 43          2012-04-29
 ==============================================================================
 
 * Release Scope
@@ -11,31 +11,22 @@ Release Notes - NetPoldo Ubuntu Rescue System - Version 41          2012-04-17
 
 Release Scope
 -------------
-This is the second experimental release of NetPoldo. This version solves the
-autodetection problem for removable devices making NetPoldo usable also for
-deployment on removable devices with the local-root initial ramdisk.
-Also this version contains a very reduced catalog of included software since
-up to now no final decision has been taken about the catalog of included
-software. Nevertheless the user is able to install software in the live
-system after booting by using the standard means of ubuntu:
+This is the third experimental release of NetPoldo. After solving the
+autodetection problem for removable devices and adding some important
+software in the previous releases, this release focusses on enabling
+NetPoldo as a preinstallation environment by adding some more useful
+software like uic itself, the tool also used to create NetPoldo.
 
-	apt-get update
-	apt-get install <package>
-
-Issuing apt-get update is mandatory, since the live filesystem does not
-contain any package source listing in order to save as much as possible
-memory.
+This release also delivers the final version of Ubuntu 12.04 LTS.
 
 The deliveries of this version include only the ubuntu based version for
-8.04, 10.04 and the beta of 12.04 both for amd64 and x86.
+8.04, 10.04 and 12.04 both for amd64 and x86.
 
 
 What's new
 ----------
- * Support for autodetection of the device with the filesystem containing
-   the compressed root filesystem. Autodetection is enabled by specifying
-   root=/dev/detect on the kernel commandline
- * New tool memused
+ * Final version of Ubuntu 12.04 LTS
+ * Included uic - the Ubuntu Installation Creator
 
 
 Included Software
@@ -59,11 +50,27 @@ packagets are included in this version of NetPoldo:
    + squashfs-tools
    + open-iscsi
    + parted
+
+ * Installation and deployment tools
    + partimage (*)
+   + uic (**)
 
+(*)  not included in netpoldo-1004-64 because the package partimage is not
+     available for amd64 in this version of ubuntu
 
-(*) not included in netpoldo-1004-64 because the package partimage is not
-    available for amd64 in this version of ubuntu
+(**) still not included in netpoldo-0804-32 and netpoldo-0804-64 dues to
+     compatibility issues in debian packaging. Will be solved in the next
+     release
+
+At runtime the user is able to install additional software in the live
+system by using the standard means of ubuntu:
+
+	apt-get update
+	apt-get install <package>
+
+Issuing apt-get update is mandatory, since the live filesystem does not
+contain any package source listing in order to save as much as possible
+memory.
 
 
 Memory Usage
@@ -99,11 +106,18 @@ Known Problems
 
 At now there are no known issues with the current shipped configurations. In
 order to satisfy the need of the extended functionality of some users, an
-initial ramdisc based on casper i splanned for the next releases.
+initial ramdisc based on casper is planned in a future release.
 
 
 Release History
 ---------------
+
+Version 41 released on 2012-04-17
+
+ * Support for autodetection of the device with the filesystem containing
+   the compressed root filesystem. Autodetection is enabled by specifying
+   root=/dev/detect on the kernel commandline
+ * New tool memused
 
 Version 39 released on 2012-03-31
 

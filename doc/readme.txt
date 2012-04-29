@@ -1,5 +1,5 @@
 ==============================================================================
-NetPoldo Ubuntu Rescue System - Version 41
+NetPoldo Ubuntu Rescue System - Version 43
 ==============================================================================
 
      NetPoldo is a lightweight Ubuntu system intended for rescue,
@@ -97,7 +97,7 @@ Name          | Based on                    | Architecture
 --------------+-----------------------------+---------------
 netpoldo-0804 | Ubuntu 8.04 LTS (hardy)     | i386, amd64
 netpoldo-1004 | Ubuntu 10.04 LTS (lucid)    | i386, amd64
-netpoldo-1204 | Ubuntu 12.04 BETA (precise) | i386, amd64
+netpoldo-1204 | Ubuntu 12.04 LTS (precise)  | i386, amd64
 
 Since the concept of automated production based on UIC makes it really simple
 to create derivative works, more flavours (e.g. based on debian or other
