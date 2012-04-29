@@ -88,7 +88,7 @@ function kill_delivery() {
 }
 
 
-NP_VERSION=41
+NP_VERSION=43
 
 # prepare the delivery area
 make_delivery 0804
