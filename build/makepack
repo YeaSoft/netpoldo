@@ -107,10 +107,10 @@ tar -cvzf ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-amd64.tar.gz -C boot
 touch --reference boot/netpoldo-1004/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-amd64.tar.gz
 create_iso 1004 10.04.4-${NP_VERSION} sr0
 
-tar -cvzf ${DESTPATH}/netpoldo-ubuntu-12.04.B-${NP_VERSION}-i386.tar.gz -C boot --exclude amd64 netpoldo-1204
-touch --reference boot/netpoldo-1204/i386/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-12.04.B-${NP_VERSION}-i386.tar.gz
-tar -cvzf ${DESTPATH}/netpoldo-ubuntu-12.04.B-${NP_VERSION}-amd64.tar.gz -C boot --exclude i386 netpoldo-1204
-touch --reference boot/netpoldo-1204/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-12.04.B-${NP_VERSION}-amd64.tar.gz
+tar -cvzf ${DESTPATH}/netpoldo-ubuntu-12.04.0-${NP_VERSION}-i386.tar.gz -C boot --exclude amd64 netpoldo-1204
+touch --reference boot/netpoldo-1204/i386/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-12.04.0-${NP_VERSION}-i386.tar.gz
+tar -cvzf ${DESTPATH}/netpoldo-ubuntu-12.04.0-${NP_VERSION}-amd64.tar.gz -C boot --exclude i386 netpoldo-1204
+touch --reference boot/netpoldo-1204/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-12.04.0-${NP_VERSION}-amd64.tar.gz
 create_iso 1204 12.04.4-${NP_VERSION}
 
 kill_delivery 1204

@@ -1,5 +1,5 @@
 MENU BEGIN
-	MENU TITLE  YeaSoft NetPoldo 12.04.BETA Rescue System
+	MENU TITLE  YeaSoft NetPoldo 12.04.0 Rescue System
 
 	LABEL return_main
 		MENU LABEL	^Back to Main Menu
