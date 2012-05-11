@@ -1,5 +1,5 @@
 MENU BEGIN
-	MENU TITLE  YeaSoft NetPoldo 10.04.4 Rescue System
+	MENU TITLE  YeaSoft NetPoldo Ubuntu 10.04.4 Rescue System
 
 	LABEL return_main
 		MENU LABEL	^Back to Main Menu
