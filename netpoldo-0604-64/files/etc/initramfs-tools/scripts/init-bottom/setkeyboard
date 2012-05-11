@@ -53,6 +53,9 @@ if [ "$KMAP" != "" ]; then
 	if [ -e ${rootmnt}/etc/default/keyboard ]; then
 		cat ${rootmnt}/etc/default/keyboard | sed -e "s/XKBLAYOUT=\"us\"/XKBLAYOUT=\"${KLAY}\"/g" | sed -e "s/XKBVARIANT=\"\"/XKBVARIANT=\"${KVAR}\"/g" | sed -e "s/XKBOPTIONS=\"\"/XKBOPTIONS=\"${KOPT}\"/g" > /keyboard
 		mv /keyboard ${rootmnt}/etc/default/keyboard
+	elif [ -e ${rootmnt}/etc/default/console-setup ]; then
+		cat ${rootmnt}/etc/default/console-setup | sed -e "s/XKBLAYOUT=\"us\"/XKBLAYOUT=\"${KLAY}\"/g" | sed -e "s/XKBVARIANT=\"\"/XKBVARIANT=\"${KVAR}\"/g" | sed -e "s/XKBOPTIONS=\"\"/XKBOPTIONS=\"${KOPT}\"/g" > /keyboard
+		mv /keyboard ${rootmnt}/etc/default/console-setup
 	fi
 	[ "$quiet" != "y" ] && log_end_msg
 fi

@@ -21,7 +21,7 @@ initial ramdisk.
 	fi
 
 	if [ "$LOOP" ]; then
-echo ENTERING $LOOP
+
 		while [ ! -e "/${LOOP#/}" ]; do
 			panic "ALERT!  /${LOOP#/} does not exist.  Dropping to a shell!"
 		done
