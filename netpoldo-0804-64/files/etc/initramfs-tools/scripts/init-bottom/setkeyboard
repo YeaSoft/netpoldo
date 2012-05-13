@@ -23,6 +23,9 @@ esac
 
 KEYBOARD=
 KMAP=
+KLAY=
+KVAR=
+KOPT=
 
 log_begin_msg "Parsing overlay specific parameters..."
 # Parse command line options
@@ -31,11 +34,10 @@ for x in $(cat /proc/cmdline); do
 	keyboard=*)
 		KEYBOARD=${x#keyboard=}
 		case $KEYBOARD in
-		us)	KMAP=us.kmap.gz;;
-		de)	KMAP=de.kmap.gz;;
-		it)	KMAP=it.kmap.gz;;
-		fr)	KMAP=fr.kmap.gz;;
-		es)	KMAP=es.kmap.gz;;
+		de)	KMAP=de.kmap.gz; KLAY="de"; KVAR="deadgraveacute"; KOPT="";;
+		it)	KMAP=it.kmap.gz; KLAY="it"; KVAR=""; KOPT="";;
+		fr)	KMAP=fr.kmap.gz; KLAY="fr"; KVAR=""; KOPT="";;
+		es)	KMAP=es.kmap.gz; KLAY="es"; KVAR=""; KOPT="";;
 		*)	;;
 		esac
 		;;
@@ -45,6 +47,21 @@ log_end_msg
 
 if [ "$KMAP" != "" ]; then
 	[ "$quiet" != "y" ] && log_begin_msg "Setting keyboard mapping to ${KEYBOARD}..."
-	cp ${rootmnt}/etc/console-setup/${KMAP} ${rootmnt}/etc/console-setup/boottime.kmap.gz
+	if [ -e ${rootmnt}/etc/console-setup/${KMAP} ]; then
+		cp ${rootmnt}/etc/console-setup/${KMAP} ${rootmnt}/etc/console-setup/boottime.kmap.gz
+	fi
+	if [ -e ${rootmnt}/etc/default/keyboard ]; then
+		cat ${rootmnt}/etc/default/keyboard | sed -e "s/XKBLAYOUT=\"us\"/XKBLAYOUT=\"${KLAY}\"/g" | sed -e "s/XKBVARIANT=\"\"/XKBVARIANT=\"${KVAR}\"/g" | sed -e "s/XKBOPTIONS=\"\"/XKBOPTIONS=\"${KOPT}\"/g" > /keyboard
+		mv /keyboard ${rootmnt}/etc/default/keyboard
+	elif [ -e ${rootmnt}/etc/default/console-setup ]; then
+		cat ${rootmnt}/etc/default/console-setup | sed -e "s/XKBLAYOUT=\"us\"/XKBLAYOUT=\"${KLAY}\"/g" | sed -e "s/XKBVARIANT=\"\"/XKBVARIANT=\"${KVAR}\"/g" | sed -e "s/XKBOPTIONS=\"\"/XKBOPTIONS=\"${KOPT}\"/g" > /keyboard
+		mv /keyboard ${rootmnt}/etc/default/console-setup
+	fi
 	[ "$quiet" != "y" ] && log_end_msg
 fi
+
+unset KEYBOARD
+unset KMAP
+unset KLAY
+unset KVAR
+unset KOPT

@@ -4,6 +4,9 @@
 #
 # This initramfs hook prepares the initial ramdisk for the
 # yeasoft extended boot system
+#
+# Version: 20120511
+# Compatibility: squeeze(i386,amd64), precise(i386,amd64), lucidi386,amd64), hardyi386,amd64)
 
 PREREQS=""
 
@@ -23,9 +26,13 @@ esac
 . /usr/share/initramfs-tools/hook-functions
 
 mkdir -p ${DESTDIR}/lib/udev
-copy_exec /lib/udev/cdrom_id /lib/udev
-copy_exec /lib/udev/vol_id /lib/udev
-copy_exec /lib/udev/path_id /lib/udev
+if [ -e /lib/udev/rules.d/60-cdrom_id.rules ]; then
+	mkdir -p ${DESTDIR}/lib/udev/rules.d
+	cp -p /lib/udev/rules.d/60-cdrom_id.rules ${DESTDIR}/lib/udev/rules.d/
+fi
+[ -e /lib/udev/cdrom_id ] && copy_exec /lib/udev/cdrom_id /lib/udev
+[ -e /lib/udev/vol_id ] && copy_exec /lib/udev/vol_id /lib/udev
+[ -e /lib/udev/path_id ] && copy_exec /lib/udev/path_id /lib/udev
 
 # squashfs
 manual_add_modules squashfs
@@ -34,6 +41,7 @@ manual_add_modules loop
 # random file system modules
 manual_add_modules vfat
 manual_add_modules ext3
+manual_add_modules ext4
 # needed for vfat. :-/
 manual_add_modules nls_cp437
 manual_add_modules nls_utf8
