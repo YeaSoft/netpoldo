@@ -1,4 +1,4 @@
-#!/bin/sh
+q#!/bin/sh
 #
 # (c) 2012 YeaSoft Int'l - Leo Moll
 #
@@ -8,7 +8,7 @@
 # operation
 #
 # Version: 20120511
-# Compatibility: precise(i386,amd64)
+# Compatibility: hardy(i386,amd64), lucid(i386,amd64), precise(i386,amd64)
 
 DHCPD_DEFAULT="/etc/default/dhcp3-server"
 
