@@ -9,5 +9,6 @@
 # raid1
 # sd_mod
 
+loop
 squashfs
 aufs

@@ -2,10 +2,13 @@
 #
 # (c) 2012 YeaSoft Int'l - Leo Moll
 #
-# This initramfs script implements support for branch filesystem
-# in local rootfs environments.
+# This initramfs script implements support for root filesystem
+# autodetection without casper.
 # This part is executed at the BEGIN of the "local" root mount
 # operation
+#
+# Version: 20120513
+# Compatibility: lucid(i386,amd64)
 
 
 PREREQ=""
@@ -38,10 +41,6 @@ is_nice_device() {
 	if /lib/udev/path_id "${sysfs_path}" | egrep -q "ID_PATH=(usb|pci-[^-]*-(ide|scsi|usb)|platform-orion-ehci|platform-mmc|platform-mxsdhci)"; then
 		return 0
 	fi
-# ubuntu 12.04
-#	if /sbin/udevadm test-builtin path_id "${sysfs_path}" | egrep -q "ID_PATH=(usb|pci-[^-]*-(ide|sas|scsi|usb|virtio)|platform-sata_mv|platform-orion-ehci|platform-mmc|platform-mxsdhci|platform-omap_hsmmc|platform-sdhci-tegra)"; then
-#		return 0
-#	fi
 	if echo ${sysfs_path} | grep -q "^/block/dm-"; then
 		return 0
 	fi
@@ -87,7 +86,7 @@ get_fstype() {
 
 
 
-check_dev () {
+check_dev() {
 	sysdev="${1}"
 	devname="${2}"
 	if [ -z "${devname}" ]; then
