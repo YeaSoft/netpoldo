@@ -87,10 +87,8 @@ packages are included in this version of NetPoldo:
      available for amd64 in this version of ubuntu
 
 A complete package list is included as package-list.txt in each distribution
-archive.
-
-At runtime the user is able to install additional software in the live
-system by using the standard means of ubuntu:
+archive. At runtime the user is able to install additional software in the
+live system by using the standard means of ubuntu:
 
 	apt-get update
 	apt-get install <package>
@@ -119,7 +117,7 @@ Ubuntu 10.04 - amd64 | 111.9M |     198.8M | 119.9M |  n/a
 ---------------------+--------+------------+--------+--------
 Ubuntu 12.04 - i386  |  94.5M |     183.9M |  96.4M |  n/a
 ---------------------+--------+------------+--------+--------
-Ubuntu 12.04 - amd64 | 116.8M |     209.5M | 114.6M |  n/a
+Ubuntu 12.04 - amd64 | 114.2M |     213.5M | 121.3M |  n/a
 ---------------------+--------+------------+--------+--------
 Debian 6 - i386      |  69.7M |     152.4M |  78.4M |  n/a
 ---------------------+--------+------------+--------+--------
