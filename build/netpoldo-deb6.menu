@@ -13,8 +13,8 @@ MENU BEGIN
  Launch the local version of NetPoldo 32 bit. This version loads the squashfs
  filesystem from the host volume leaving more free memory
 		ENDTEXT
-		KERNEL		/netpoldo-0604/i386/netpoldo.vmlinuz
-		APPEND		initrd=/netpoldo-0604/i386/netpoldo.initrd root=/dev/detect loop=/netpoldo-0604/i386/netpoldo.squashfs branch=/dev/ram
+		KERNEL		/netpoldo-deb6/i386/netpoldo.vmlinuz
+		APPEND		initrd=/netpoldo-deb6/i386/netpoldo.initrd root=/dev/detect loop=/netpoldo-deb6/i386/netpoldo.squashfs branch=/dev/ram
 
 	LABEL netpoldo0604-32i
 		MENU LABEL	NetPoldo 32 bit Integrated Version
@@ -24,8 +24,8 @@ MENU BEGIN
  permits deployment through PXE/tftp by providing only the kernel and the
  initial ramdisk but requiring more memory
 		ENDTEXT
-		KERNEL		/netpoldo-0604/i386/netpoldo.vmlinuz
-		APPEND		initrd=/netpoldo-0604/i386/netpoldo.initrdi
+		KERNEL		/netpoldo-deb6/i386/netpoldo.vmlinuz
+		APPEND		initrd=/netpoldo-deb6/i386/netpoldo.initrdi
 
 #	LABEL netpoldo0604-32n
 #		MENU LABEL	NetPoldo 32 bit Network Version
@@ -33,8 +33,8 @@ MENU BEGIN
 # Launch the networke version of NetPoldo 32 bit. This version loads the squashfs
 # filesystem from a NFS share on a network server leaving more free memory
 #		ENDTEXT
-#		KERNEL		/netpoldo-0604/i386/netpoldo.vmlinuz
-#		APPEND		initrd=/netpoldo-0604/i386/netpoldo.initrdn rootdelay=3 root=/dev/nfs nfsroot=169.254.19.65:/mnt/data/tftproot,rw ip=dhcp loop=/yeaboot/netpoldo-0604/i386/netpoldo.squashfs branch=/dev/ram
+#		KERNEL		/netpoldo-deb6/i386/netpoldo.vmlinuz
+#		APPEND		initrd=/netpoldo-deb6/i386/netpoldo.initrdn rootdelay=3 root=/dev/nfs nfsroot=169.254.19.65:/mnt/data/tftproot,rw ip=dhcp loop=/yeaboot/netpoldo-deb6/i386/netpoldo.squashfs branch=/dev/ram
 
 
 	LABEL netpoldo0604-64
@@ -43,8 +43,8 @@ MENU BEGIN
  Launch the local version of NetPoldo 32 bit. This version loads the squashfs
  filesystem from the host volume leaving more free memory
 		ENDTEXT
-		KERNEL		/netpoldo-0604/amd64/netpoldo.vmlinuz
-		APPEND		initrd=/netpoldo-0604/amd64/netpoldo.initrd root=/dev/detect loop=/netpoldo-0604/amd64/netpoldo.squashfs branch=/dev/ram
+		KERNEL		/netpoldo-deb6/amd64/netpoldo.vmlinuz
+		APPEND		initrd=/netpoldo-deb6/amd64/netpoldo.initrd root=/dev/detect loop=/netpoldo-deb6/amd64/netpoldo.squashfs branch=/dev/ram
 
 	LABEL netpoldo0604-64i
 		MENU LABEL	NetPoldo 64 bit Integrated Version
@@ -54,8 +54,8 @@ MENU BEGIN
  permits deployment through PXE/tftp by providing only the kernel and the
  initial ramdisk but requiring more memory
 		ENDTEXT
-		KERNEL		/netpoldo-0604/amd64/netpoldo.vmlinuz
-		APPEND		initrd=/netpoldo-0604/amd64/netpoldo.initrdi
+		KERNEL		/netpoldo-deb6/amd64/netpoldo.vmlinuz
+		APPEND		initrd=/netpoldo-deb6/amd64/netpoldo.initrdi
 
 #	LABEL netpoldo0604-64n
 #		MENU LABEL	NetPoldo 64 bit Network Version
@@ -63,7 +63,7 @@ MENU BEGIN
 # Launch the networke version of NetPoldo 64 bit. This version loads the squashfs
 # filesystem from a NFS share on a network server leaving more free memory
 #		ENDTEXT
-#		KERNEL		/netpoldo-0604/amd64/netpoldo.vmlinuz
-#		APPEND		initrd=/netpoldo-0604/amd64/netpoldo.initrdn rootdelay=3 root=/dev/nfs nfsroot=169.254.19.65:/mnt/data/tftproot,rw ip=dhcp loop=/yeaboot/netpoldo-0604/amd64/netpoldo.squashfs branch=/dev/ram
+#		KERNEL		/netpoldo-deb6/amd64/netpoldo.vmlinuz
+#		APPEND		initrd=/netpoldo-deb6/amd64/netpoldo.initrdn rootdelay=3 root=/dev/nfs nfsroot=169.254.19.65:/mnt/data/tftproot,rw ip=dhcp loop=/yeaboot/netpoldo-deb6/amd64/netpoldo.squashfs branch=/dev/ram
 
 MENU END
