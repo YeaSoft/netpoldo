@@ -25,7 +25,7 @@ TIMEOUT			50
 ONTIMEOUT		l0
 
 MENU INCLUDE		textmode.conf
-MENU TITLE		YeaSoft NetPoldo Ubuntu Rescue System ${2}
+MENU TITLE		YeaSoft NetPoldo ${4} Rescue System ${2}
 MENU AUTOBOOT		Starting local system in # second{,s}
 
 EOF
@@ -52,7 +52,7 @@ EOF
 	) >> isotemp/isolinux/isolinux.cfg
 
 
-	mkisofs -o ${DESTPATH}/netpoldo-ubuntu-${2}.iso \
+	mkisofs -o ${DESTPATH}/netpoldo-${3}-${2}.iso \
 		-V "NetPoldo ${NP_VERSION}" \
 		-b isolinux/isolinux.bin \
 		-c isolinux/boot.cat \
@@ -65,8 +65,23 @@ EOF
 
 
 	rm -rf isotemp
-	touch --reference boot/netpoldo-${1}/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-${2}.iso
+	touch --reference boot/netpoldo-${1}/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-${3}-${2}.iso
 }
+
+
+function create_tar() {
+	tar -cvzf ${DESTPATH}/netpoldo-${3}-${2}-i386.tar.gz -C boot --exclude amd64 netpoldo-${1}
+	touch --reference boot/netpoldo-${1}/i386/netpoldo.squashfs ${DESTPATH}/netpoldo-${3}-${2}-i386.tar.gz
+	tar -cvzf ${DESTPATH}/netpoldo-${3}-${2}-amd64.tar.gz -C boot --exclude i386 netpoldo-${1}
+	touch --reference boot/netpoldo-${1}/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-${3}-${2}-amd64.tar.gz
+}
+
+
+function create_uic() {
+	uic pack -v -o ${DESTPATH} ${DESTPATH}/netpoldo-${1}-32
+	uic pack -v -o ${DESTPATH} ${DESTPATH}/netpoldo-${1}-64
+}
+
 
 function make_delivery() {
 	echo Creating delivery area boot/netpoldo-${1}
@@ -83,38 +98,39 @@ function make_delivery() {
 	cp -a ${DESTPATH}/netpoldo-${1}-64/output/*		boot/netpoldo-${1}/amd64
 }
 
+
 function kill_delivery() {
 	rm -rf boot/netpoldo-${1}
 }
 
 
-NP_VERSION=43
+NP_VERSION=45
 
 # prepare the delivery area
+make_delivery deb6
 make_delivery 0804
 make_delivery 1004
 make_delivery 1204
 
-tar -cvzf ${DESTPATH}/netpoldo-ubuntu-08.04.4-${NP_VERSION}-i386.tar.gz -C boot --exclude amd64 netpoldo-0804
-touch --reference boot/netpoldo-0804/i386/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-08.04.4-${NP_VERSION}-i386.tar.gz
-tar -cvzf ${DESTPATH}/netpoldo-ubuntu-08.04.4-${NP_VERSION}-amd64.tar.gz -C boot --exclude i386 netpoldo-0804
-touch --reference boot/netpoldo-0804/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-08.04.4-${NP_VERSION}-amd64.tar.gz
-create_iso 0804 08.04.4-${NP_VERSION}
+create_uic deb6
+create_tar deb6 06.0.5-${NP_VERSION} "debian"
+create_iso deb6 06.0.5-${NP_VERSION} "debian" "Debian"
 
-tar -cvzf ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-i386.tar.gz -C boot --exclude amd64 netpoldo-1004
-touch --reference boot/netpoldo-1004/i386/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-i386.tar.gz
-tar -cvzf ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-amd64.tar.gz -C boot --exclude i386 netpoldo-1004
-touch --reference boot/netpoldo-1004/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-10.04.4-${NP_VERSION}-amd64.tar.gz
-create_iso 1004 10.04.4-${NP_VERSION} sr0
+create_uic 0804
+create_tar 0804 08.04.4-${NP_VERSION} "ubuntu"
+create_iso 0804 08.04.4-${NP_VERSION} "ubuntu" "Ubuntu"
 
-tar -cvzf ${DESTPATH}/netpoldo-ubuntu-12.04.0-${NP_VERSION}-i386.tar.gz -C boot --exclude amd64 netpoldo-1204
-touch --reference boot/netpoldo-1204/i386/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-12.04.0-${NP_VERSION}-i386.tar.gz
-tar -cvzf ${DESTPATH}/netpoldo-ubuntu-12.04.0-${NP_VERSION}-amd64.tar.gz -C boot --exclude i386 netpoldo-1204
-touch --reference boot/netpoldo-1204/amd64/netpoldo.squashfs ${DESTPATH}/netpoldo-ubuntu-12.04.0-${NP_VERSION}-amd64.tar.gz
-create_iso 1204 12.04.4-${NP_VERSION}
+create_uic 1004
+create_tar 1004 10.04.4-${NP_VERSION} "ubuntu"
+create_iso 1004 10.04.4-${NP_VERSION} "ubuntu" "Ubuntu"
+
+create_uic 1204
+create_tar 1204 12.04.4-${NP_VERSION} "ubuntu"
+create_iso 1204 12.04.4-${NP_VERSION} "ubuntu" "Ubuntu"
 
 kill_delivery 1204
 kill_delivery 1004
 kill_delivery 0804
+kill_delivery deb6
 
 rmdir boot
