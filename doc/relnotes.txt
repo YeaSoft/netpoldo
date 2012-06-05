@@ -1,5 +1,5 @@
 ==============================================================================
-Release Notes - NetPoldo Rescue System - Version 45                 2012-05-14
+Release Notes - NetPoldo Rescue System - Version 47                 2012-06-05
 ==============================================================================
 
 * Release Scope
@@ -12,16 +12,10 @@ Release Notes - NetPoldo Rescue System - Version 45                 2012-05-14
 
 Release Scope
 -------------
-This is the forth experimental release of NetPoldo. The highlight of this
-release is the first shipping of a Debian version of NetPoldo. Since Debian
-has noticeable differences to Ubuntu in the startup phase and in the minimal
-package assets, it required many changes both in UIC as in the initial ramdisk
-overlays in order to release a fully compatible Debian based version.
-As a result of this development, there has been a convergence between the
-overlay scripts making it possible to use the same overlay scripts for all
-supported ubuntu and Debian versions in the majority of the cases. This
-Version also includes the new version 0.12 of UIC in all NetPoldo flavors
-making it possible to start installation of any kind from NetPoldo itself.
+This is the fifth experimental release of NetPoldo. Other than the previous
+releases, which came with a plenty of highlights, this release is intended
+mainly as a consolidation and upstream release and contains only a handful
+of small improvements.
 
 The deliveries of this version include both the ubuntu based version for
 8.04, 10.04 and 12.04 as the debian squeeze version all as amd64 and i386.
@@ -29,8 +23,9 @@ The deliveries of this version include both the ubuntu based version for
 
 What's new
 ----------
- * Support for Debian Squeeze 6.0.5
-
+ * Additional package syslinux
+ * UIC updated to version 0.14
+ * Improvements in the handling of root passwords
 
 Shipped Versions
 ----------------
@@ -39,21 +34,21 @@ The following versions of NetPoldo are available for download:
 
 Base OS                 | Platform | Archive
 ========================+==========+==========================================
-Debian 6 "squeeze"      | i386     | netpoldo-debian-06.0.5-45-i386.tar.gz
+Debian 6 "squeeze"      | i386     | netpoldo-debian-06.0.5-47-i386.tar.gz
 ------------------------+----------+------------------------------------------
-Debian 6 "squeeze"      | amd64    | netpoldo-debian-06.0.5-45-amd64.tar.gz
+Debian 6 "squeeze"      | amd64    | netpoldo-debian-06.0.5-47-amd64.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 12.04 "precise"  | i386     | netpoldo-ubuntu-12.04.0-45-i386.tar.gz
+Ubuntu 12.04 "precise"  | i386     | netpoldo-ubuntu-12.04.0-47-i386.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 12.04 "precise"  | amd64    | netpoldo-ubuntu-12.04.0-45-amd64.tar.gz
+Ubuntu 12.04 "precise"  | amd64    | netpoldo-ubuntu-12.04.0-47-amd64.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 10.04 "lucid"    | i386     | netpoldo-ubuntu-10.04.4-45-i386.tar.gz
+Ubuntu 10.04 "lucid"    | i386     | netpoldo-ubuntu-10.04.4-47-i386.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 10.04 "lucid"    | amd64    | netpoldo-ubuntu-10.04.4-45-amd64.tar.gz
+Ubuntu 10.04 "lucid"    | amd64    | netpoldo-ubuntu-10.04.4-47-amd64.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 8.04 "hardy"     | i386     | netpoldo-ubuntu-08.04.4-45-i386.tar.gz
+Ubuntu 8.04 "hardy"     | i386     | netpoldo-ubuntu-08.04.4-47-i386.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 8.04 "hardy"     | amd64    | netpoldo-ubuntu-08.04.4-45-amd64.tar.gz
+Ubuntu 8.04 "hardy"     | amd64    | netpoldo-ubuntu-08.04.4-47-amd64.tar.gz
 
 
 
@@ -74,16 +69,18 @@ packages are included in this version of NetPoldo:
    + sshfs
 
  * File System and Volume Tools
+   + syslinux(*)
    + mdadm
    + squashfs-tools
    + open-iscsi
    + parted
 
  * Installation and deployment tools
-   + partimage (*)
+   + partimage (**)
    + uic
 
-(*)  not included in netpoldo-1004-64 because the package partimage is not
+(*)  including extlinux also in ubuntu 12.04
+(**) not included in netpoldo-1004-64 because the package partimage is not
      available for amd64 in this version of ubuntu
 
 A complete package list is included as package-list.txt in each distribution
@@ -107,21 +104,21 @@ minute after completion of the boot process based on the selected NetPoldo
 
 Version              | Local  | Integrated | Net    | Casper
 =====================+========+============+========+========
-Ubuntu 8.04 - i386   |  67.4M |     124.9M |  61.8M |  n/a
+Debian 6 - i386      |  69.0M |     153.1M |  72.4M |  n/a
 ---------------------+--------+------------+--------+--------
-Ubuntu 8.04 - amd64  |  85.8M |     143.5M |  80,4M |  n/a
+Debian 6 - amd64     |  88.1M |     172.5M |  94.9M |  n/a
 ---------------------+--------+------------+--------+--------
-Ubuntu 10.04 - i386  |  78.3M |     164.1M |  77.6M |  n/a
+Ubuntu 12.04 - i386  |  93.9M |     186.2M |  92.9M |  n/a
 ---------------------+--------+------------+--------+--------
-Ubuntu 10.04 - amd64 | 111.9M |     198.8M | 119.9M |  n/a
+Ubuntu 12.04 - amd64 | 113.4M |     207.8M | 117.7M |  n/a
 ---------------------+--------+------------+--------+--------
-Ubuntu 12.04 - i386  |  94.5M |     183.9M |  96.4M |  n/a
+Ubuntu 10.04 - i386  |  78.2M |     164.4M |  76.3M |  n/a
 ---------------------+--------+------------+--------+--------
-Ubuntu 12.04 - amd64 | 114.2M |     213.5M | 121.3M |  n/a
+Ubuntu 10.04 - amd64 | 111.0M |     199.1M | 109.7M |  n/a
 ---------------------+--------+------------+--------+--------
-Debian 6 - i386      |  69.7M |     152.4M |  78.4M |  n/a
+Ubuntu 8.04 - i386   |  66.2M |     124.7M |  60.7M |  n/a
 ---------------------+--------+------------+--------+--------
-Debian 6 - amd64     |  89.3M |     172.2M |  99.2M |  n/a
+Ubuntu 8.04 - amd64  |  84.5M |     143.2M |  80,3M |  n/a
 
 
 The following method was used:
@@ -140,6 +137,10 @@ initial ramdisc based on casper is planned in a future release.
 
 Release History
 ---------------
+
+Version 45 released on 2012-05-14
+
+ * Support for Debian Squeeze 6.0.5
 
 Version 43 released on 2012-04-29
 

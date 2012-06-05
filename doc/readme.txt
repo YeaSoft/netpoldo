@@ -1,5 +1,5 @@
 ==============================================================================
-NetPoldo Rescue System - Version 45
+NetPoldo Rescue System - Version 47
 ==============================================================================
 
      NetPoldo is a lightweight Debian family live system intended for
@@ -184,8 +184,11 @@ The following options may or must be specified on the kernel command line.
 Parameter                         Description
 ---------------------------------+------------------------------------------
                                   This option sets the password for the user
-                                  root. On the console there is no need to know
-password=<password>               this password, since the consoles go directly
+                                  root. It can be specified as clear text or
+                                  as a '/etc/shadow'-compatible hash value if
+password=<password>               prefixed with 'SHADOW:'
+password=SHADOW:<hash value>      On the console there is no need to know this
+                                  password, since the consoles go directly
                                   into the shell. The password is useful when
                                   logging in via SSH. The default password is
                                   password

@@ -30,4 +30,12 @@ if [ -e "/initrd.img" ]; then
 	fi
 fi
 
-
+# install the extlinux binaries without adding boot support for extlinux
+tempdir=$(mktemp -d)
+pushd $tempdir
+apt-get download extlinux
+dpkg-deb -x extlinux_* .
+cp ./usr/bin/extlinux /usr/bin/extlinux
+cp ./usr/share/man/man1/extlinux.1.gz /usr/share/man/man1/extlinux.1.gz
+popd
+rm -rf $tempdir

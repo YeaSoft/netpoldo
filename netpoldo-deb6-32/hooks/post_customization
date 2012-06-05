@@ -8,6 +8,9 @@
 # This hook will be called by several commands after making any customizations
 # (file copies and deletions) to the installation environment in $TARGET
 
+# fix broken file attributes (git does not preserve all file attributes)
+chmod 600 ${TARGET}/files/etc/ssh/ssh_host_?sa_key
+chmod 600 ${TARGET}/chroot/etc/ssh/ssh_host_?sa_key
 
 # copy the configuration file to the destination file system but remove the array
 # definitions since they are not compatible with /bin/sh
