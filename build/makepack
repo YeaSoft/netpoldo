@@ -104,7 +104,7 @@ function kill_delivery() {
 }
 
 
-NP_VERSION=47
+NP_VERSION=49
 
 # prepare the delivery area
 make_delivery deb7
@@ -130,8 +130,8 @@ create_tar 1004 10.04.4-${NP_VERSION} "ubuntu"
 create_iso 1004 10.04.4-${NP_VERSION} "ubuntu" "Ubuntu"
 
 create_uic 1204
-create_tar 1204 12.04.0-${NP_VERSION} "ubuntu"
-create_iso 1204 12.04.0-${NP_VERSION} "ubuntu" "Ubuntu"
+create_tar 1204 12.04.2-${NP_VERSION} "ubuntu"
+create_iso 1204 12.04.2-${NP_VERSION} "ubuntu" "Ubuntu"
 
 kill_delivery 0804
 kill_delivery 1004
