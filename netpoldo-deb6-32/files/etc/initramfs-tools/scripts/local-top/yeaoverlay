@@ -7,7 +7,7 @@
 # This part is executed at the BEGIN of the "local" root mount
 # operation
 #
-# Version: 20120510
+# Version: 20120513
 # Compatibility: squeeze(i386,amd64),lucid(i386,amd64)
 
 PREREQ=""

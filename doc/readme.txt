@@ -1,5 +1,5 @@
 ==============================================================================
-NetPoldo Rescue System - Version 47
+NetPoldo Rescue System - Version 49
 ==============================================================================
 
      NetPoldo is a lightweight Debian family live system intended for
@@ -95,6 +95,7 @@ Currently the following ready made distributions are available:
 
 Name          | Based on                    | Architecture
 --------------+-----------------------------+---------------
+netpoldo-deb7 | Debian 7.0.0 (wheezy)       | i386, amd64
 netpoldo-deb6 | Debian 6.0.5 (squeeze)      | i386, amd64
 netpoldo-1204 | Ubuntu 12.04 LTS (precise)  | i386, amd64
 netpoldo-1004 | Ubuntu 10.04 LTS (lucid)    | i386, amd64
@@ -345,7 +346,7 @@ Copyright and Legal Stuff
 NetPoldo is a derivative work based on Debian and Ubuntu Linux created by Leo
 Moll <leo.moll@yeasoft.com>
 
-Copyright: 2012 Leo Moll <leo.moll@yeasoft.com>
+Copyright: 2012-2013 Leo Moll <leo.moll@yeasoft.com>
 
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

@@ -1,5 +1,5 @@
 ==============================================================================
-Release Notes - NetPoldo Rescue System - Version 47                 2012-06-05
+Release Notes - NetPoldo Rescue System - Version 49                 2013-03-14
 ==============================================================================
 
 * Release Scope
@@ -18,13 +18,13 @@ mainly as a consolidation and upstream release and contains only a handful
 of small improvements.
 
 The deliveries of this version include both the ubuntu based version for
-8.04, 10.04 and 12.04 as the debian squeeze version all as amd64 and i386.
+8.04, 10.04 and 12.04 and Debian Squeeze and Wheezy all as amd64 and i386.
 
 
 What's new
 ----------
- * Additional package syslinux
- * UIC updated to version 0.14
+ * Support for Debian Wheezy 7.0.0
+ * UIC updated to version 0.15
  * Improvements in the handling of root passwords
 
 Shipped Versions
@@ -34,21 +34,25 @@ The following versions of NetPoldo are available for download:
 
 Base OS                 | Platform | Archive
 ========================+==========+==========================================
-Debian 6 "squeeze"      | i386     | netpoldo-debian-06.0.5-47-i386.tar.gz
+Debian 7 "wheezy"       | i386     | netpoldo-debian-07.0.0-49-i386.tar.gz
 ------------------------+----------+------------------------------------------
-Debian 6 "squeeze"      | amd64    | netpoldo-debian-06.0.5-47-amd64.tar.gz
+Debian 7 "wheezy"       | amd64    | netpoldo-debian-07.0.0-49-amd64.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 12.04 "precise"  | i386     | netpoldo-ubuntu-12.04.0-47-i386.tar.gz
+Debian 6 "squeeze"      | i386     | netpoldo-debian-06.0.7-49-i386.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 12.04 "precise"  | amd64    | netpoldo-ubuntu-12.04.0-47-amd64.tar.gz
+Debian 6 "squeeze"      | amd64    | netpoldo-debian-06.0.7-49-amd64.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 10.04 "lucid"    | i386     | netpoldo-ubuntu-10.04.4-47-i386.tar.gz
+Ubuntu 12.04 "precise"  | i386     | netpoldo-ubuntu-12.04.2-49-i386.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 10.04 "lucid"    | amd64    | netpoldo-ubuntu-10.04.4-47-amd64.tar.gz
+Ubuntu 12.04 "precise"  | amd64    | netpoldo-ubuntu-12.04.2-49-amd64.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 8.04 "hardy"     | i386     | netpoldo-ubuntu-08.04.4-47-i386.tar.gz
+Ubuntu 10.04 "lucid"    | i386     | netpoldo-ubuntu-10.04.4-49-i386.tar.gz
 ------------------------+----------+------------------------------------------
-Ubuntu 8.04 "hardy"     | amd64    | netpoldo-ubuntu-08.04.4-47-amd64.tar.gz
+Ubuntu 10.04 "lucid"    | amd64    | netpoldo-ubuntu-10.04.4-49-amd64.tar.gz
+------------------------+----------+------------------------------------------
+Ubuntu 8.04 "hardy"     | i386     | netpoldo-ubuntu-08.04.4-49-i386.tar.gz
+------------------------+----------+------------------------------------------
+Ubuntu 8.04 "hardy"     | amd64    | netpoldo-ubuntu-08.04.4-49-amd64.tar.gz
 
 
 
@@ -104,6 +108,10 @@ minute after completion of the boot process based on the selected NetPoldo
 
 Version              | Local  | Integrated | Net    | Casper
 =====================+========+============+========+========
+Debian 7 - i386      |  69.0M |     153.1M |  72.4M |  n/a
+---------------------+--------+------------+--------+--------
+Debian 7 - amd64     |  88.1M |     172.5M |  94.9M |  n/a
+---------------------+--------+------------+--------+--------
 Debian 6 - i386      |  69.0M |     153.1M |  72.4M |  n/a
 ---------------------+--------+------------+--------+--------
 Debian 6 - amd64     |  88.1M |     172.5M |  94.9M |  n/a
@@ -137,6 +145,12 @@ initial ramdisc based on casper is planned in a future release.
 
 Release History
 ---------------
+
+Version 47 released on 2012-06-05
+
+ * Additional package syslinux
+ * UIC updated to version 0.15
+ * Improvements in the handling of root passwords
 
 Version 45 released on 2012-05-14
 

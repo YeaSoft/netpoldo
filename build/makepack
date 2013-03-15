@@ -107,14 +107,19 @@ function kill_delivery() {
 NP_VERSION=47
 
 # prepare the delivery area
+make_delivery deb7
 make_delivery deb6
-make_delivery 0804
-make_delivery 1004
 make_delivery 1204
+make_delivery 1004
+make_delivery 0804
+
+create_uic deb7
+create_tar deb7 07.0.0-${NP_VERSION} "debian"
+create_iso deb7 07.0.0-${NP_VERSION} "debian" "Debian"
 
 create_uic deb6
-create_tar deb6 06.0.5-${NP_VERSION} "debian"
-create_iso deb6 06.0.5-${NP_VERSION} "debian" "Debian"
+create_tar deb6 06.0.7-${NP_VERSION} "debian"
+create_iso deb6 06.0.7-${NP_VERSION} "debian" "Debian"
 
 create_uic 0804
 create_tar 0804 08.04.4-${NP_VERSION} "ubuntu"
@@ -128,9 +133,10 @@ create_uic 1204
 create_tar 1204 12.04.0-${NP_VERSION} "ubuntu"
 create_iso 1204 12.04.0-${NP_VERSION} "ubuntu" "Ubuntu"
 
-kill_delivery 1204
-kill_delivery 1004
 kill_delivery 0804
+kill_delivery 1004
+kill_delivery 1204
 kill_delivery deb6
+kill_delivery deb7
 
 rmdir boot
