@@ -12,10 +12,14 @@ Release Notes - NetPoldo Rescue System - Version 49                 2013-03-14
 
 Release Scope
 -------------
-This is the fifth experimental release of NetPoldo. Other than the previous
+This is the sixth experimental release of NetPoldo. Other than the previous
 releases, which came with a plenty of highlights, this release is intended
 mainly as a consolidation and upstream release and contains only a handful
-of small improvements.
+of small improvements and the long awaited update to current versions after
+10 months of inactivity.
+
+As a premiere, this release includes the first edition of netpoldo for
+Debian 7 (wheezy).
 
 The deliveries of this version include both the ubuntu based version for
 8.04, 10.04 and 12.04 and Debian Squeeze and Wheezy all as amd64 and i386.
@@ -25,7 +29,7 @@ What's new
 ----------
  * Support for Debian Wheezy 7.0.0
  * UIC updated to version 0.15
- * Improvements in the handling of root passwords
+
 
 Shipped Versions
 ----------------
@@ -108,13 +112,13 @@ minute after completion of the boot process based on the selected NetPoldo
 
 Version              | Local  | Integrated | Net    | Casper
 =====================+========+============+========+========
-Debian 7 - i386      |  69.0M |     153.1M |  72.4M |  n/a
+Debian 7 - i386      |  81.4M |     181.1M |  81.6M |  n/a
 ---------------------+--------+------------+--------+--------
-Debian 7 - amd64     |  88.1M |     172.5M |  94.9M |  n/a
+Debian 7 - amd64     | 100.3M |     201.4M | 103.0M |  n/a
 ---------------------+--------+------------+--------+--------
-Debian 6 - i386      |  69.0M |     153.1M |  72.4M |  n/a
+Debian 6 - i386      |  70.3M |     152.9M |  77.7M |  n/a
 ---------------------+--------+------------+--------+--------
-Debian 6 - amd64     |  88.1M |     172.5M |  94.9M |  n/a
+Debian 6 - amd64     |  88.9M |     173.0M |  96.4M |  n/a
 ---------------------+--------+------------+--------+--------
 Ubuntu 12.04 - i386  |  93.9M |     186.2M |  92.9M |  n/a
 ---------------------+--------+------------+--------+--------
