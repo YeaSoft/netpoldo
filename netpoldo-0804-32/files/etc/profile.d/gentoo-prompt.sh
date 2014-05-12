@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Check for interactive bash.
+[ -z "$BASH_VERSION" -o -z "$PS1" ] && return
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
 	xterm-color) color_prompt=yes;;
