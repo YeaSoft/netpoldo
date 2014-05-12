@@ -6,8 +6,8 @@
 # in local rootfs environments.
 # This part is executed at the BEGIN of the "init" script sequence
 #
-# Version: 20120510
-# Compatibility: squeeze(i386,amd64)
+# Version: 20130314
+# Compatibility: wheezy(i386,amd64) squeeze(i386,amd64)
 
 PREREQ=""
 prereqs()
