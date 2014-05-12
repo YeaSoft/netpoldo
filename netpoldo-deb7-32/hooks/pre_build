@@ -28,4 +28,4 @@ Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
 permitted by applicable law.
 
 EOF
-) > "$TARGET/chroot/etc/motd"
+) > "$TARGET/chroot/etc/motd.tail"
