@@ -1,5 +1,9 @@
 #!/bin/bash
 
+SCRIPTNAME=$(basename "$0")
+SCRIPTPATH=$(dirname "$0")
+DESTPATH=${SCRIPTPATH}/..
+
 ALLSOURCES="\
 	netpoldo-deb8-64 netpoldo-deb8-32 \
 	netpoldo-deb7-64 netpoldo-deb7-32 \
@@ -8,9 +12,9 @@ ALLSOURCES="\
 	netpoldo-1004-64 netpoldo-1004-32 \
 "
 
-SCRIPTNAME=$(basename "$0")
-SCRIPTPATH=$(dirname "$0")
-DESTPATH=${SCRIPTPATH}/..
+REQUIRED="\
+	uic \
+"
 
 function test_source_dir {
 	if [ ! -d "$1" ]; then
@@ -20,12 +24,11 @@ function test_source_dir {
 }
 
 function test_sources {
+	[ $# -eq 0 ] && SOURCES=${ALLSOURCES}
 	while [ $# -gt 0 ]; do
 		SELMASK="${1:-*}"
 		for SRCDIR in ${ALLSOURCES}; do
 			case "${SRCDIR}" in
-			(clean|create|build|pack|all)
-				;;
 			(${SELMASK})
 				test_source_dir "${SCRIPTPATH}/${SRCDIR}"
 				SOURCES="${SOURCES} ${SRCDIR}"
@@ -41,17 +44,6 @@ function test_sources {
 	fi
 }
 
-
-function test_netpoldo {
-	for npdir in ${SOURCES}; do
-		for npext in vmlinuz initrd initrdi initrdn squashfs; do
-			if [ ! -e "${npdir}/output/netpoldo.${npext}" ]; then
-				echo "ERROR: Some of the needed artefacts are missing." >&2
-				exit 2
-			fi
-		done
-	done
-}
 
 function netpoldo_clean {
 	test_sources "$@"
@@ -81,13 +73,26 @@ function netpoldo_pack {
 	done
 }
 
+function netpoldo_fake {
+	test_sources "$@"
+	for npdir in ${SOURCES}; do
+		echo "would process: ${npdir}"
+	done
+}
 
-if ! which syslinux > /dev/null; then
-	echo "ERROR: syslinux not installed" >&2
-	exit 1
-fi
+# check for required tools
+for REQTOOL in ${REQUIRED}; do
+	if ! which ${REQTOOL} > /dev/null; then
+		echo "ERROR: ${REQTOOL} is not installed" >&2
+		exit 2
+	fi
+done
 
-case "$1" in
+# eat action parameter
+ACTION="$1"
+shift
+
+case "${ACTION}" in
 clean)
 	netpoldo_clean "$@"
 	;;
@@ -100,6 +105,9 @@ build)
 pack)
 	netpoldo_pack "$@"
 	;;
+fake)
+	netpoldo_fake "$@"
+	;;
 all)
 	netpoldo_clean "$@"
 	netpoldo_create "$@"
@@ -107,7 +115,7 @@ all)
 	netpoldo_pack "$@"
 	;;
 *)
-	echo "Usage: make.sh {clean|create|build|pack|all}"
+	echo "Usage: make.sh {clean|create|build|pack|fake|all}"
         exit 1
         ;;
 esac
