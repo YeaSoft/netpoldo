@@ -1,0 +1,13 @@
+# local environment stuff
+/netpoldo-????-??/custom.conf
+
+# build intermediates
+/netpoldo-????-??/chroot
+/netpoldo-????-??/output
+/netpoldo-????-??/uictpl.md5
+/boottemp
+/isotemp
+
+# build deliverables
+/netpoldo-*.iso
+/netpoldo-*.tar.gz
