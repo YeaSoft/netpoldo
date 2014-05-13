@@ -142,7 +142,7 @@ find_livefs() {
 	return 1
 }
 
-if [ -z "${ROOT}" -o "${ROOT}" = "/dev/detect" ]; then
+if [ "${ROOT}" = "/dev/detect" ]; then
 	[ "$quiet" != "y" ] && log_begin_msg "Detecting root device for loop mount..."
 
 	trycount=0
