@@ -69,7 +69,7 @@ function netpoldo_build {
 function netpoldo_pack {
 	test_sources "$@"
 	for npdir in ${SOURCES}; do
-		uic pack -v -o ${SCRIPTPATH}/.. ${SCRIPTPATH}/${npdir}
+		uic pack -v -o ${SCRIPTPATH} ${SCRIPTPATH}/${npdir}
 	done
 }
 
