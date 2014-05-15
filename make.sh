@@ -49,6 +49,7 @@ function netpoldo_clean {
 	test_sources "$@"
 	for npdir in ${SOURCES}; do
 		uic clean -v ${SCRIPTPATH}/${npdir}
+		rm -f ${SCRIPTPATH}/${npdir}/uictpl.md5 ${SCRIPTPATH}/${npdir}_*.md5 ${SCRIPTPATH}/${npdir}_*.tar.bz2
 	done
 }
 
