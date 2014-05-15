@@ -319,6 +319,7 @@ set to german.
 NetPoldo can be built from it's templates using __UIC__, the Unified
 Installation creator. See the [project page](http://www.yeasoft.com/site/projects:uic)
 for further information.
+__UIC_ is also [hosted on GitHub](https://github.com/YeaSoft/uic).
 
 ### Copyright and Legal Stuff ###
 
