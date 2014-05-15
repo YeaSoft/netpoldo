@@ -11,3 +11,5 @@
 # build deliverables
 /netpoldo-*.iso
 /netpoldo-*.tar.gz
+/netpoldo-????-??_*.md5
+/netpoldo-????-??_*.tar.bz2
