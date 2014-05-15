@@ -177,13 +177,19 @@ line.
     via SSH. The default password is _"password"_.
 
   * `keyboard=<layout>`:
-    This option sets the keyboard layout for the consoles. NetPoldo currently
-    supports only 5 basic keyboard layouts:
-    - us: United States
+    This option sets the keyboard layout for the consoles. Basically every
+    supported two letter code may work with Debian. On Ubuntu flavours, only
+    the following keyboard layouts are supported:
+    - cn: Chinese
     - de: German
-    - it: Italian
-    - fr: French
     - es: Spanish
+    - fr: French
+    - gb: English United Kingdom
+    - it: Italian
+    - pt: Portoguese
+    - ro: Romenian
+    - ru: Russian
+    - us: English United States
 
   * `timezone=<tzname>`:
     This option sets the timezone of the system. The timezone must be specified
