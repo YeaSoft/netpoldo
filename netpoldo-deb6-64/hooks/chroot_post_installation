@@ -17,18 +17,15 @@
 # and updating the boot manager every time the kernel is updated or
 # changed.
 
-pushd /root
+tempdir=$(mktemp -d)
+pushd $tempdir
 apt-get install -d extlinux
-mkdir -p extlinux
-dpkg -x /var/cache/apt/archives/extlinux_*.deb extlinux
-if [ -x extlinux/usr/sbin/extlinux ]; then
-	mv extlinux/usr/sbin/extlinux /usr/sbin
-elif [ -x extlinux/usr/bin/extlinux ]; then
-	mv extlinux/usr/bin/extlinux /usr/bin
+dpkg -x /var/cache/apt/archives/extlinux_*.deb .
+if [ -f usr/bin/extlinux ]; then
+        cp -a usr/bin/extlinux /usr/bin
+elif [ -f usr/sbin/extlinux ]; then
+	cp -a usr/sbin/extlinux /usr/sbin
 fi
-rm -rf extlinux*
-apt-get clean
+cp -a usr/share/man/man1/extlinux.1.gz /usr/share/man/man1/extlinux.1.gz
 popd
-
-# make sure we do not exit with no error
-[ 1 = 1 ]
+rm -rf $tempdir
