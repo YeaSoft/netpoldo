@@ -5,8 +5,8 @@
 # This initramfs hook prepares the initial ramdisk for the
 # yeasoft extended boot system
 #
-# Version: 20120511
-# Compatibility: squeeze(i386,amd64), precise(i386,amd64), lucidi386,amd64), hardyi386,amd64)
+# Version: 20130314
+# Compatibility: wheezy(i386,amd64) squeeze(i386,amd64), precise(i386,amd64), lucidi386,amd64), hardyi386,amd64)
 
 PREREQS=""
 
