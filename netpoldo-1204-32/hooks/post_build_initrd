@@ -11,12 +11,3 @@
 if [ "$UIC_BUILDNAME" = "netpoldo-integrated" ]; then
 	rm -f "${TARGET}/chroot/netpoldo.squashfs"
 fi
-
-# fix the ugly bug with absolute initrd.img link on ubuntu precise
-LINKPATH=$(readlink "${TARGET}/chroot/initrd.img")
-if [ "${LINKPATH:0:1}" = "/" ]; then
-	show_verbose 1 "Fixing wrong absolute symbolic link to initrd.img"
-	# oh yea! It's a f...... absolute link....
-	rm "${TARGET}/chroot/initrd.img"
-	ln -s "${LINKPATH:1}" "${TARGET}/chroot/initrd.img"
-fi
