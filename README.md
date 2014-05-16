@@ -1,5 +1,5 @@
 NetPoldo Rescue System
-----------------------
+======================
 
 >    __NetPoldo__ is a lightweight Debian family live system intended for
      rescue, maintenance or installation purposes. It is delivered as
@@ -7,7 +7,8 @@ NetPoldo Rescue System
      is available both for the _i386_ architecture as for the _amd64_
      based on some Ubuntu and Debian versions.
 
-### Motivation ###
+Motivation
+----------
 
 Does this sound similar to the [Ubuntu Rescue Remix](http://ubuntu-rescue-remix.org/)?
 Yes. It does. But there are fundamental differences that make it worth to give
@@ -53,9 +54,10 @@ Debian-based operating system packages. The advantages of using this method are:
    * easy customisation
    * easy creation of derived works
 
-### Highlights ###
+Highlights
+----------
 
-#### Three completely different boot strategies ####
+### Three completely different boot strategies ###
 
    * __Integrated Boot: 2 files.__ Only the Linux kernel and an initial ramdisk
      image containing the whole, compressed root filesystem. This is the easiest
@@ -73,7 +75,7 @@ Debian-based operating system packages. The advantages of using this method are:
      NFS share. This permits to boot NetPoldo on systems with low memory
      completely from the network.
 
-#### Configurable from the boot command line ####
+### Configurable from the boot command line ###
 
 In addition to the standard kernel parameters supported by Debian and Ubuntu,
 there are some additional parameters that permit to influence the functionality
@@ -81,7 +83,7 @@ of NetPoldo. It is possible to modify the network login password, the keyboard
 layout and also external persistant storage can be specified.
 
 
-#### Availability of several flavours ####
+### Availability of several flavours ###
 
 Currently _NetPoldo_ is available in several flavours. Each flavour is based on
 a specific Debian or Ubuntu version and architecture:
@@ -100,7 +102,7 @@ Since the concept of automated production based on __UIC__ makes it really easy
 to create derivative works, more flavours may be released in future.
 
 
-#### Easy to update ####
+### Easy to update ###
 
 Although the official NetPoldo binaries will be updated on a more or less
 regular basis, thanks to __UIC__ every user can produce without any effort his
@@ -115,7 +117,7 @@ uic build netpoldo-deb7-32
 ````
 
 
-#### Easy to customise ####
+### Easy to customise ###
 
 You want to create customized versions of NetPoldo? You can! Thanks to __UIC__
 you have two approaches to do so:
@@ -134,7 +136,8 @@ you have two approaches to do so:
       containing every customisation you want.
 
 
-### Versioning ###
+Versioning
+----------
 
 The deliverables of NetPoldo use the following naming and versioning scheme:
 
@@ -152,7 +155,9 @@ file (`/etc/motd`) gives information about the date and time of the last update.
 Additionally all versioning and identification information is contained inside
 NetPoldo in `/etc/uictpl.conf` as environment variables.
 
-### Usage ###
+
+Usage
+-----
 
 The following files are part of NetPoldo. All other files contained in the
 distribution archive are only intended for sample or documentation.
@@ -163,7 +168,7 @@ distribution archive are only intended for sample or documentation.
   * `netpoldo.initrdn` - The network enabled version of the initial ramdisk
   * `netpoldo.squashfs` - The compressed root file system
 
-#### Command Line Parameters ####
+### Command Line Parameters ###
 
 The following options __may__ or __must__ be specified on the kernel command
 line.
@@ -244,13 +249,14 @@ not:
     `ip` parameter.
 
 
-### Samples ###
+Samples
+-------
 
 All following samples show boot scenarios based on syslinux configuration
 files.
 
 
-#### Simple integrated boot ####
+### Simple integrated boot ###
 
 ````
 KERNEL   netpoldo.vmlinuz
@@ -262,7 +268,7 @@ _"password"_, non persistent storage) from a physical volume with `syslinux`
 or PXE via TFTP.
 
 
-#### Boot from removable volume #####
+### Boot from removable volume ####
 
 ````
 KERNEL  /netpoldo-deb7/i386/netpoldo.vmlinuz
@@ -277,7 +283,7 @@ there is no persistent storage. The password of the user `root` is set
 to _"aBRAcadaBRA"_.
 
 
-#### Boot from local known volume ####
+### Boot from local known volume ###
 
 ````
 KERNEL  /netpoldo-deb7/i386/netpoldo.vmlinuz
@@ -292,7 +298,7 @@ writes are done in the ramdisk, so there is no persistent storage. The password
 of the user `root` is set to _"aBRAcadaBRA"_.
 
 
-#### Boot from Network with NFS ####
+### Boot from Network with NFS ###
 
 ````
 KERNEL   netpoldo-deb7/i386/netpoldo.vmlinuz
@@ -313,7 +319,9 @@ storage. The time zone will be set to `Europe/Berlin`, the password set to the
 encrypted representation of _"aBRAcadaBRA"_ and the default keyboard layout is
 set to german.
 
-### Useful Links ###
+
+Related Links
+-------------
 
    * Download location for prebuilt binaries:
      http://www.yeasoft.com/downloads/netpoldo/
@@ -327,7 +335,9 @@ Installation creator. See the [project page](http://www.yeasoft.com/site/project
 for further information.
 __UIC_ is also [hosted on GitHub](https://github.com/YeaSoft/uic).
 
-### Copyright and Legal Stuff ###
+
+Copyright and Legal Stuff
+-------------------------
 
 NetPoldo is a derivative work based on Debian and Ubuntu Linux created by Leo
 Moll <leo.moll@yeasoft.com>
