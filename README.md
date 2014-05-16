@@ -330,10 +330,12 @@ Related Links
    * GitHub Repository:
      https://github.com/YeaSoft/NetPoldo
 
-NetPoldo can be built from it's templates using __UIC__, the Unified
-Installation creator. See the [project page](http://www.yeasoft.com/site/projects:uic)
-for further information.
-__UIC_ is also [hosted on GitHub](https://github.com/YeaSoft/uic).
+NetPoldo can be built from its templates using __UIC__, the Unified
+Installation Creator. See the [project page][1] for further information.
+ __UIC__ is also [hosted on GitHub][2].
+
+[1]: http://www.yeasoft.com/site/projects:uic
+[2]: https://github.com/YeaSoft/uic
 
 
 Copyright and Legal Stuff

@@ -124,14 +124,15 @@ image:
 
 The following method was used:
 
+````
   echo $(($(grep MemTotal /proc/meminfo | awk '{print $2}') - \
     $(grep MemFree /proc/meminfo | awk '{print $2}') ))
-
+````
 
 Known Problems
 --------------
 
-At now there are no known issues with the current shipped configurations.
+At now there are no known issues with the currently shipped configurations.
 
 
 Release History

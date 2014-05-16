@@ -8,6 +8,7 @@ ALLSOURCES="\
 	netpoldo-deb8-64 netpoldo-deb8-32 \
 	netpoldo-deb7-64 netpoldo-deb7-32 \
 	netpoldo-deb6-64 netpoldo-deb6-32 \
+	netpoldo-1404-64 netpoldo-1404-32 \
 	netpoldo-1204-64 netpoldo-1204-32 \
 	netpoldo-1004-64 netpoldo-1004-32 \
 "
