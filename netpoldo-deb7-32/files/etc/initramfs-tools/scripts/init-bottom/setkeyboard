@@ -35,7 +35,8 @@ for x in $(cat /proc/cmdline); do
 		KEYBOARD=${x#keyboard=}
 		case ${KEYBOARD} in
 		de)	KMAP="de.kmap.gz"; KLAY="de"; KVAR="deadgraveacute"; KOPT="";;
-		ru)	KMAP="ru.kmap.gz"; KLAY="us,ru"; KVAR=""; KOPT="";;
+		ro)	KMAP="ro.kmap.gz"; KLAY="ro"; KVAR="std"; KOPT="";;
+		ru)	KMAP="ru.kmap.gz"; KLAY="us,ru"; KVAR=","; KOPT="grp:alt_shift_toggle,grp_led:scroll";;
 		??)	KMAP="${KEYBOARD}.kmap.gz"; KLAY="${KEYBOARD}"; KVAR=""; KOPT="";;
 		*)	;;
 		esac

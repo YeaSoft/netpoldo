@@ -7,8 +7,8 @@
 # This part is executed at the BEGIN of the "local" root mount
 # operation
 #
-# Version: 20140512
-# Compatibility: jessie(i386,amd64)
+# Version: 20140516
+# Compatibility: jessie(i386,amd64) trusty(i386,amd64)
 
 PREREQ=""
 prereqs()

@@ -78,8 +78,8 @@ included in this version of NetPoldo:
    - parted
    - mtools
    - extundelete
-   - recover
-   - e2undel
+   - recover (not included in Debian 8 and Ubuntu Trusty)
+   - e2undel (not included in Debian 8 and Ubuntu Trusty)
    - chntpw
 
  * Installation and deployment tools
