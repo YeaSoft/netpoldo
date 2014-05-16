@@ -32,12 +32,12 @@ The following versions of NetPoldo are available for download:
 ````
   Base OS                 | Platform | Archive
  -------------------------|----------|-----------------------------------------
-  Debian 8 "jessie"       | i386     | netpoldo-debian-08.0.0-51-i386.tar.gz
-  Debian 8 "jessie"       | amd64    | netpoldo-debian-08.0.0-51-amd64.tar.gz
-  Debian 7 "wheezy"       | i386     | netpoldo-debian-07.5.0-51-i386.tar.gz
-  Debian 7 "wheezy"       | amd64    | netpoldo-debian-07.5.0-51-amd64.tar.gz
-  Debian 6 "squeeze"      | i386     | netpoldo-debian-06.0.9-51-i386.tar.gz
-  Debian 6 "squeeze"      | amd64    | netpoldo-debian-06.0.9-51-amd64.tar.gz
+  Debian 8 "jessie"       | i386     | netpoldo-debian-8.0.0-51-i386.tar.gz
+  Debian 8 "jessie"       | amd64    | netpoldo-debian-8.0.0-51-amd64.tar.gz
+  Debian 7 "wheezy"       | i386     | netpoldo-debian-7.5.0-51-i386.tar.gz
+  Debian 7 "wheezy"       | amd64    | netpoldo-debian-7.5.0-51-amd64.tar.gz
+  Debian 6 "squeeze"      | i386     | netpoldo-debian-6.0.9-51-i386.tar.gz
+  Debian 6 "squeeze"      | amd64    | netpoldo-debian-6.0.9-51-amd64.tar.gz
   Ubuntu 14.04 "trusty"   | i386     | netpoldo-ubuntu-14.04.0-51-i386.tar.gz
   Ubuntu 14.04 "trusty"   | amd64    | netpoldo-ubuntu-14.04.0-51-amd64.tar.gz
   Ubuntu 12.04 "precise"  | i386     | netpoldo-ubuntu-12.04.4-51-i386.tar.gz
@@ -110,16 +110,20 @@ image:
 
 
 ````
-  Version              | Local  | Integrated | Net    
+  Version              | Local  | Integrated | Net
  ----------------------|--------|------------|--------
-  Debian 7 - i386      |  81.4M |     181.1M |  81.6M 
-  Debian 7 - amd64     | 100.3M |     201.4M | 103.0M 
-  Debian 6 - i386      |  70.3M |     152.9M |  77.7M 
-  Debian 6 - amd64     |  88.9M |     173.0M |  96.4M 
-  Ubuntu 12.04 - i386  |  93.9M |     186.2M |  92.9M 
-  Ubuntu 12.04 - amd64 | 113.4M |     207.8M | 117.7M 
-  Ubuntu 10.04 - i386  |  78.2M |     164.4M |  76.3M 
-  Ubuntu 10.04 - amd64 | 111.0M |     199.1M | 109.7M 
+  Debian 8 - i386      |  97.9M |     211.2M | 100.4M
+  Debian 8 - amd64     | 120.4M |     232.5M | 123.4M
+  Debian 7 - i386      |  82.8M |     183.4M |  84.1M
+  Debian 7 - amd64     | 103.4M |     203.6M | 105.4M
+  Debian 6 - i386      |  72.7M |     154.4M |  79.6M
+  Debian 6 - amd64     |  91.4M |     174.7M |  98.0M
+  Ubuntu 14.04 - i386  | 109.8M |     235.4M | 109.5M
+  Ubuntu 14.04 - amd64 | 109.8M |     234.8M | 109.5M
+  Ubuntu 12.04 - i386  |  92.0M |     190.4M |  90.9M
+  Ubuntu 12.04 - amd64 | 118.7M |     220.4M | 116.4M
+  Ubuntu 10.04 - i386  |  80.4M |     171.8M |  81.6M
+  Ubuntu 10.04 - amd64 | 115.1M |     207.6M | 114.3M
 ````
 
 The following method was used:
