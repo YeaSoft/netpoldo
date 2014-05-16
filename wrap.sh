@@ -17,6 +17,7 @@ ALLSOURCES="\
 	netpoldo-deb8 \
 	netpoldo-deb7 \
 	netpoldo-deb6 \
+	netpoldo-1404 \
 	netpoldo-1204 \
 	netpoldo-1004 \
 "

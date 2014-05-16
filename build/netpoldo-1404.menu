@@ -1,0 +1,69 @@
+MENU BEGIN
+	MENU TITLE  YeaSoft NetPoldo Ubuntu 14.04.0 Rescue System
+
+	LABEL return_main
+		MENU LABEL	^Back to Main Menu
+		MENU EXIT
+
+	MENU SEPARATOR
+
+	LABEL netpoldo1404-32
+		MENU LABEL	NetPoldo 32 bit Local Version
+		TEXT HELP
+ Launch the local version of NetPoldo 32 bit. This version loads the squashfs
+ filesystem from the host volume leaving more free memory
+		ENDTEXT
+		KERNEL		/netpoldo-1404/i386/netpoldo.vmlinuz
+		APPEND		initrd=/netpoldo-1404/i386/netpoldo.initrd loop=/netpoldo-1404/i386/netpoldo.squashfs branch=/dev/ram
+
+	LABEL netpoldo1404-32i
+		MENU LABEL	NetPoldo 32 bit Integrated Version
+		TEXT HELP
+ Launch the integrated version of NetPoldo 32 bit. This version loads from an
+ initial ramdisk that contains also the squashfs filesystem. This solution
+ permits deployment through PXE/tftp by providing only the kernel and the
+ initial ramdisk but requiring more memory
+		ENDTEXT
+		KERNEL		/netpoldo-1404/i386/netpoldo.vmlinuz
+		APPEND		initrd=/netpoldo-1404/i386/netpoldo.initrdi
+
+#	LABEL netpoldo1404-32n
+#		MENU LABEL	NetPoldo 32 bit Network Version
+#		TEXT HELP
+# Launch the networke version of NetPoldo 32 bit. This version loads the squashfs
+# filesystem from a NFS share on a network server leaving more free memory
+#		ENDTEXT
+#		KERNEL		/netpoldo-1404/i386/netpoldo.vmlinuz
+#		APPEND		initrd=/netpoldo-1404/i386/netpoldo.initrdn rootdelay=3 nfsroot=169.254.19.65:/mnt/data/tftproot,rw ip=dhcp loop=/yeaboot/netpoldo-1404/i386/netpoldo.squashfs branch=/dev/ram
+
+
+	LABEL netpoldo1404-64
+		MENU LABEL	NetPoldo 64 bit Local Version
+		TEXT HELP
+ Launch the local version of NetPoldo 32 bit. This version loads the squashfs
+ filesystem from the host volume leaving more free memory
+		ENDTEXT
+		KERNEL		/netpoldo-1404/amd64/netpoldo.vmlinuz
+		APPEND		initrd=/netpoldo-1404/amd64/netpoldo.initrd loop=/netpoldo-1404/amd64/netpoldo.squashfs branch=/dev/ram
+
+	LABEL netpoldo1404-64i
+		MENU LABEL	NetPoldo 64 bit Integrated Version
+		TEXT HELP
+ Launch the integrated version of NetPoldo 64 bit. This version loads from an
+ initial ramdisk that contains also the squashfs filesystem. This solution
+ permits deployment through PXE/tftp by providing only the kernel and the
+ initial ramdisk but requiring more memory
+		ENDTEXT
+		KERNEL		/netpoldo-1404/amd64/netpoldo.vmlinuz
+		APPEND		initrd=/netpoldo-1404/amd64/netpoldo.initrdi
+
+#	LABEL netpoldo1404-64n
+#		MENU LABEL	NetPoldo 64 bit Network Version
+#		TEXT HELP
+# Launch the networke version of NetPoldo 64 bit. This version loads the squashfs
+# filesystem from a NFS share on a network server leaving more free memory
+#		ENDTEXT
+#		KERNEL		/netpoldo-1404/amd64/netpoldo.vmlinuz
+#		APPEND		initrd=/netpoldo-1404/amd64/netpoldo.initrdn rootdelay=3 nfsroot=169.254.19.65:/mnt/data/tftproot,rw ip=dhcp loop=/yeaboot/netpoldo-1404/amd64/netpoldo.squashfs branch=/dev/ram
+
+MENU END
