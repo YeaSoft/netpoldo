@@ -16,8 +16,8 @@ As a premiere, this release includes the first edition of netpoldo for Debian
 be updated any more.
 
 
-What's new in Version 51
-------------------------
+What's new in Version 51 (2014-05-16)
+-------------------------------------
  * UIC updated to version 0.16.6
  * New software packages (see below)
  * New flavour based on Debian Jessie 8 Beta
