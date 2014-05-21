@@ -19,9 +19,20 @@ be updated any more.
 What's new in Version 51 (2014-05-16)
 -------------------------------------
  * UIC updated to version 0.16.6
- * New software packages (see below)
+ * New software packages
+   - rsync
+   - partimage
+   - dosfstools and mtools
+   - syslinux (including extlinux binary)
+   - extundelete (not included in Ubuntu 10.04 and Debian 6 versions)
+   - recover (not included in Debian 8 versions)
+   - e2undel (not included in Debian 8 versions)
  * New flavour based on Debian Jessie 8 Beta
  * New flavour based on Ubuntu Trusty 14.04
+ * New command line switch `settimezone=<AREA>/<ZONE>` allows to configure the
+   time zone of the system
+ * Added support for more keyboard layouts (Chinese, English United Kingdom,
+   Portoguese, Romenian, Russian)
 
 
 Shipped Versions
@@ -88,8 +99,8 @@ included in this version of NetPoldo:
    - uic
 
 A complete package list is included as `package-list.txt` in each distribution
-archive. At runtime the user is able to install additional software in the
-live system by using the standard means of ubuntu:
+archive. When running, the user can install additional software into the live
+system by using the standard commands:
 
 ````
 apt-get update
@@ -136,7 +147,8 @@ The following method was used:
 Known Problems
 --------------
 
-At now there are no known issues with the currently shipped configurations.
+At the time of this release there are no known issues with the currently
+shipped configurations.
 
 
 Release History

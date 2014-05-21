@@ -213,20 +213,20 @@ line.
     ramdisk image, this parameter may be optional or not. See below.
 
   * `loop=<root filesystem image file>`:
-	This option sets the path and name to the compressed root filesystem image.
-	Depending upon the intial ramdisk image, this parameter may be optional or
-	not. See below.
+    This option sets the path and name to the compressed root filesystem image.
+    Depending upon the intial ramdisk image, this parameter may be optional or
+    not. See below.
 
   * `root=<root fs device>`:
-	This option sets the device for the filesystem where the compressed root
-	filesystem image is located. It can be a physical filesystem formatted with
-	`ext2`, `ext3`, any filesystem supported by the initial ramdisk, an NFS
-	mount (use `/dev/nfs` to specify the NFS mount) or autodetection of a local
-	or removable device (use `/dev/detect`). It is permitted to reference the
-	device by device name (e.g. `/dev/sda1`), by volume label (e.g.
-	`LABEL=boot-disk`) and by unique volume id (e.g.
-	`UUID=f5a49b89-e8c7-448a-a920-ae0aaac53b7b`). Depending upon the initial
-	ramdisk image, this parameter may be optional or not. See below.
+    This option sets the device for the filesystem where the compressed root
+    filesystem image is located. It can be a physical filesystem formatted with
+    `ext2`, `ext3`, any filesystem supported by the initial ramdisk, an NFS
+    mount (use `/dev/nfs` to specify the NFS mount) or autodetection of a local
+    or removable device (use `/dev/detect`). It is permitted to reference the
+    device by device name (e.g. `/dev/sda1`), by volume label (e.g.
+    `LABEL=boot-disk`) and by unique volume id (e.g.
+    `UUID=f5a49b89-e8c7-448a-a920-ae0aaac53b7b`). Depending upon the initial
+    ramdisk image, this parameter may be optional or not. See below.
 
 Based on the used initial ramdisk image, some parametrs may be mandatory or
 not:
