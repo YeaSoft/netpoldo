@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# (c) 2012-2014 YeaSoft Int'l - Leo Moll
+#
+# uic hook:	post_customization
+# called by:	uic_create, uic_build, uic_upgrade
+#
+# This hook will be called by several commands after making any customizations
+# (file copies and deletions) to the installation environment in ${TARGET}
+
+# fix broken file attributes (git does not preserve all file attributes)
+chmod 600 ${UIC_WP_CUSTOM}/etc/ssh/ssh_host_*_key
+chmod 600 ${UIC_WP_ROOTFS}/etc/ssh/ssh_host_*_key
