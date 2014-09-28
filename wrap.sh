@@ -31,19 +31,23 @@ REQUIRED="\
 "
 
 function test_source_areas {
+	npdir="${SCRIPTPATH}/${1}"
+	if [ ! -d "${npdir}" ]; then
+		echo "ERROR: Source path '${npdir}' does not exist. Aborting..." >&2
+		exit 2
+	fi
+	if [ ! -f "${npdir}/uictpl.conf" ]; then
+		echo "ERROR: The uic configuration file is missing from ${1}." >&2
+		exit 2
+	fi
 	for FLAV in 32 64; do
-		npdir="${SCRIPTPATH}/$1-${FLAV}"
-		if [ ! -d "${npdir}" ]; then
-			echo "ERROR: Source path '${npdir}' does not exist. Aborting..." >&2
-			exit 2
-		fi
-		if [ ! -f "${npdir}/uictpl.conf" ]; then
-			echo "ERROR: The uic configuration file is missing from $1-${FLAV}." >&2
+		if [ ! -f "${npdir}/uictpl.${FLAV}.conf" ]; then
+			echo "ERROR: The uic ${FLAV} variant configuration file is missing from ${1}." >&2
 			exit 2
 		fi
 		for npext in vmlinuz initrd initrdi initrdn squashfs; do
-			if [ ! -f "${npdir}/output/netpoldo.${npext}" ]; then
-				echo "ERROR: Some of the needed artefacts are missing from $1-${FLAV}." >&2
+			if [ ! -f "${npdir}/output/${FLAV}/netpoldo.${npext}" ]; then
+				echo "ERROR: Some of the needed artefacts are missing from ${1}/output/${FLAV}." >&2
 				exit 2
 			fi
 		done
@@ -83,8 +87,8 @@ function make_delivery_area {
 	echo "DEFAULT netpoldo.vmlinuz initrd=netpoldo.initrdi keyboard=us password=password" > ${TARGET}/amd64/pxelinux.cfg/default
 	cp -a /usr/lib/syslinux/pxelinux.0		${TARGET}/i386
 	cp -a /usr/lib/syslinux/pxelinux.0		${TARGET}/amd64
-	cp -a ${SCRIPTPATH}/${1}-32/output/*		${TARGET}/i386
-	cp -a ${SCRIPTPATH}/${1}-64/output/*		${TARGET}/amd64
+	cp -a ${SCRIPTPATH}/${1}/output/32/*		${TARGET}/i386
+	cp -a ${SCRIPTPATH}/${1}/output/64/*		${TARGET}/amd64
 	cp -a ${SCRIPTPATH}/*.md			${TARGET}
 }
 
@@ -100,7 +104,8 @@ function uic_require {
 }
 
 function uic_load {
-	. ${1}
+	source ${1}/uictpl.conf
+	source ${1}/uictpl.${2:-64}.conf
 	case "${UIC_RELEASE}" in
 	(squeeze|wheezy|jessie|sid)
 		DISTRO="debian"
@@ -116,17 +121,16 @@ function uic_load {
 function create_archives {
 	echo "Creating archives from ${BOOTAREA}"
 	for BITS in 32 64; do
-		npdir="${SCRIPTPATH}/${1}-${BITS}"
-		uic_load "${npdir}/uictpl.conf"
+		uic_load "${SCRIPTPATH}/${1}" ${BITS}
 		TARFILE="${SCRIPTPATH}/netpoldo-${DISTRO}-${UIC_SRCVERSION}-${UIC_ARCH}.tar.gz"
-		REFFILE="${SCRIPTPATH}/${1}-${BITS}/output/netpoldo.squashfs"
+		REFFILE="${SCRIPTPATH}/${1}/output/${BITS}/netpoldo.squashfs"
 		tar -cvzf ${TARFILE} -C ${BOOTAREA} ${1}/${UIC_ARCH} ${1}/README.md ${1}/RELNOTES.md
 		touch --reference ${REFFILE} ${TARFILE}
 	done
 }
 
 function create_iso {
-	uic_load "${SCRIPTPATH}/${1}-64/uictpl.conf"
+	uic_load "${SCRIPTPATH}/${1}/" 64
 	echo "Creating iso file"
 
 	rm -rf "${ISOAREA}"
