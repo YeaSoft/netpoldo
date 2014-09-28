@@ -111,9 +111,9 @@ installing __UIC__ the following few commands would produce a fresh, up to date
 version of NetPoldo Wheezy i386:
 
 ````
-uic get netpoldo-deb7-32
-uic create netpoldo-deb7-32
-uic build netpoldo-deb7-32
+uic get netpoldo-deb7
+uic create netpoldo-deb7 --variant 32
+uic build netpoldo-deb7
 ````
 
 
@@ -130,8 +130,8 @@ you have two approaches to do so:
       configuration files). As long as you keep your UIC environment, you will
       be able to create up to date versions of your customised NetPoldo.
    2. The derivative work approach: this requires additionally some knowledge
-      about UIC. You will create a new UIC template based on the original
-      NetPoldo templates. With this (redistributable) template you can
+      about UIC. You will create a new UIC recipe based on the original
+      NetPoldo recipes. With this (redistributable) recipe you can
       automatically create and keep up to date new NetPoldo-like systems
       containing every customisation you want.
 
@@ -330,7 +330,7 @@ Related Links
    * GitHub Repository:
      https://github.com/YeaSoft/NetPoldo
 
-NetPoldo can be built from its templates using __UIC__, the Unified
+NetPoldo can be built from its recipes using __UIC__, the Unified
 Installation Creator. See the [project page][1] for further information.
  __UIC__ is also [hosted on GitHub][2].
 

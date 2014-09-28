@@ -5,17 +5,19 @@ SCRIPTPATH=$(dirname "$0")
 DESTPATH=${SCRIPTPATH}/..
 
 ALLSOURCES="\
-	netpoldo-deb8-64 netpoldo-deb8-32 \
-	netpoldo-deb7-64 netpoldo-deb7-32 \
-	netpoldo-deb6-64 netpoldo-deb6-32 \
-	netpoldo-1404-64 netpoldo-1404-32 \
-	netpoldo-1204-64 netpoldo-1204-32 \
-	netpoldo-1004-64 netpoldo-1004-32 \
+	netpoldo-deb8 \
+	netpoldo-deb7 \
+	netpoldo-deb6 \
+	netpoldo-1404 \
+	netpoldo-1204 \
+	netpoldo-1004 \
 "
 
 REQUIRED="\
 	uic \
 "
+
+ARCHS="32 64"
 
 function test_source_dir {
 	if [ ! -d "$1" ]; then
@@ -54,17 +56,14 @@ function netpoldo_clean {
 	done
 }
 
-function netpoldo_create {
+function netpoldo_make {
 	test_sources "$@"
 	for npdir in ${SOURCES}; do
-		uic create -v ${SCRIPTPATH}/${npdir}
-	done
-}
-
-function netpoldo_build {
-	test_sources "$@"
-	for npdir in ${SOURCES}; do
-		uic build -v ${SCRIPTPATH}/${npdir}
+		for arch in ${ARCHS}; do
+			rm -rf ${SCRIPTPATH}/${npdir}/chroot
+			uic create --variant ${arch} -v ${SCRIPTPATH}/${npdir}
+			uic build -v ${SCRIPTPATH}/${npdir}
+		done
 	done
 }
 
@@ -78,7 +77,9 @@ function netpoldo_pack {
 function netpoldo_fake {
 	test_sources "$@"
 	for npdir in ${SOURCES}; do
-		echo "would process: ${npdir}"
+		for arch in ${ARCHS}; do
+			echo "would process: ${npdir} --variant ${arch}"
+		done
 	done
 }
 
@@ -91,18 +92,23 @@ for REQTOOL in ${REQUIRED}; do
 done
 
 # eat action parameter
-ACTION="$1"
+ACTION="${1}"
 shift
+# eat optional architecture parameter
+case "${1}" in
+32|64)	ARCHS="${1}"
+	shift
+	;;
+*)	ARCHS="32 64"
+	;;
+esac
 
 case "${ACTION}" in
 clean)
 	netpoldo_clean "$@"
 	;;
-create)
-	netpoldo_create "$@"
-	;;
-build)
-	netpoldo_build "$@"
+make)
+	netpoldo_make "$@"
 	;;
 pack)
 	netpoldo_pack "$@"
@@ -112,12 +118,11 @@ fake)
 	;;
 all)
 	netpoldo_clean "$@"
-	netpoldo_create "$@"
-	netpoldo_build "$@"
+	netpoldo_make "$@"
 	netpoldo_pack "$@"
 	;;
 *)
-	echo "Usage: make.sh {clean|create|build|pack|fake|all}"
+	echo "Usage: make.sh {clean|make|pack|fake|all}"
         exit 1
         ;;
 esac

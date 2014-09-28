@@ -4,7 +4,7 @@ NetPoldo Rescue System - Release Notes
 Release Scope
 -------------
 
-This is the seventh experimental release of NetPoldo. Other than the previous
+This is the eighth experimental release of NetPoldo. Other than the previous
 releases, which came with a plenty of highlights, also this release is mainly
 intended as a consolidation and upstream release and contains some useful
 improvements, some new packages and the long awaited update to current
@@ -16,23 +16,9 @@ As a premiere, this release includes the first edition of netpoldo for Debian
 be updated any more.
 
 
-What's new in Version 51 (2014-05-16)
+What's new in Version 53 (2014-09-28)
 -------------------------------------
- * UIC updated to version 0.16.6
- * New software packages
-   - rsync
-   - partimage
-   - dosfstools and mtools
-   - syslinux (including extlinux binary)
-   - extundelete (not included in Ubuntu 10.04 and Debian 6 versions)
-   - recover (not included in Debian 8 versions)
-   - e2undel (not included in Debian 8 versions)
- * New flavour based on Debian Jessie 8 Beta
- * New flavour based on Ubuntu Trusty 14.04
- * New command line switch `settimezone=<AREA>/<ZONE>` allows to configure the
-   time zone of the system
- * Added support for more keyboard layouts (Chinese, English United Kingdom,
-   Portoguese, Romenian, Russian)
+ * UIC updated to version 0.17.0
 
 
 Shipped Versions
@@ -153,6 +139,24 @@ shipped configurations.
 
 Release History
 ---------------
+
+### Version 51 released on 2014-05-16 ###
+
+ * UIC updated to version 0.16.6
+ * New software packages
+   - rsync
+   - partimage
+   - dosfstools and mtools
+   - syslinux (including extlinux binary)
+   - extundelete (not included in Ubuntu 10.04 and Debian 6 versions)
+   - recover (not included in Debian 8 versions)
+   - e2undel (not included in Debian 8 versions)
+ * New flavour based on Debian Jessie 8 Beta
+ * New flavour based on Ubuntu Trusty 14.04
+ * New command line switch `settimezone=<AREA>/<ZONE>` allows to configure the
+   time zone of the system
+ * Added support for more keyboard layouts (Chinese, English United Kingdom,
+   Portoguese, Romenian, Russian)
 
 ### Version 49 released on 2013-03-14 ###
 
