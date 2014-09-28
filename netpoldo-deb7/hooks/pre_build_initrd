@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# (c) 2012-2014 YeaSoft Int'l - Leo Moll
+#
+# uic hook:	pre_build_initrd
+# called by:	uic_build
+#
+# This hook will be called by uic_build before performing an initial ramdisk
+# build procedure in the installation environment in ${TARGET}
+
+if [ "${UIC_BUILDNAME}" = "netpoldo-integrated" ]; then
+	# test if the squash filesystem is available
+	if [ -f "${UIC_WP_OUTPUT}/netpoldo.squashfs" ]; then
+		cp "${UIC_WP_OUTPUT}/netpoldo.squashfs"	"${TARGET}/chroot"
+	else
+		show_error "Missing netpoldo.squashfs"
+		exit 2
+	fi
+fi
+
+# fix the ugly bug with synbolic links to absolute oathnames on root
+for linked_object in initrd.img libnss3.so vmlinuz; do
+	LINKFILE="${UIC_WPS_ROOTFS}/${linked_object}"
+	if [ -l "${LINKFILE}" ]; then
+		LINKPATH=$(readlink "${LINKFILE}")
+		if [ "${LINKPATH:0:1}" = "/" ]; then
+			# oh yea! It's a f...... absolute link....
+			show_verbose 1 "Fixing wrong absolute symbolic link to ${linked_object}"
+			rm -f "${LINKFILE}"
+			ln -s "${LINKPATH:1}" "${LINKFILE}"
+		fi
+	fi
+done
