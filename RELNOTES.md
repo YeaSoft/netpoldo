@@ -29,18 +29,18 @@ The following versions of NetPoldo are available for download:
 ````
   Base OS                 | Platform | Archive
  -------------------------|----------|-----------------------------------------
-  Debian 8 "jessie"       | i386     | netpoldo-debian-8.0.0-51-i386.tar.gz
-  Debian 8 "jessie"       | amd64    | netpoldo-debian-8.0.0-51-amd64.tar.gz
-  Debian 7 "wheezy"       | i386     | netpoldo-debian-7.5.0-51-i386.tar.gz
-  Debian 7 "wheezy"       | amd64    | netpoldo-debian-7.5.0-51-amd64.tar.gz
-  Debian 6 "squeeze"      | i386     | netpoldo-debian-6.0.9-51-i386.tar.gz
-  Debian 6 "squeeze"      | amd64    | netpoldo-debian-6.0.9-51-amd64.tar.gz
-  Ubuntu 14.04 "trusty"   | i386     | netpoldo-ubuntu-14.04.0-51-i386.tar.gz
-  Ubuntu 14.04 "trusty"   | amd64    | netpoldo-ubuntu-14.04.0-51-amd64.tar.gz
-  Ubuntu 12.04 "precise"  | i386     | netpoldo-ubuntu-12.04.4-51-i386.tar.gz
-  Ubuntu 12.04 "precise"  | amd64    | netpoldo-ubuntu-12.04.4-51-amd64.tar.gz
-  Ubuntu 10.04 "lucid"    | i386     | netpoldo-ubuntu-10.04.4-51-i386.tar.gz
-  Ubuntu 10.04 "lucid"    | amd64    | netpoldo-ubuntu-10.04.4-51-amd64.tar.gz
+  Debian 8 "jessie"       | i386     | netpoldo-debian-8.0.0-53-i386.tar.gz
+  Debian 8 "jessie"       | amd64    | netpoldo-debian-8.0.0-53-amd64.tar.gz
+  Debian 7 "wheezy"       | i386     | netpoldo-debian-7.6.0-53-i386.tar.gz
+  Debian 7 "wheezy"       | amd64    | netpoldo-debian-7.6.0-53-amd64.tar.gz
+  Debian 6 "squeeze"      | i386     | netpoldo-debian-6.0.10-53-i386.tar.gz
+  Debian 6 "squeeze"      | amd64    | netpoldo-debian-6.0.10-53-amd64.tar.gz
+  Ubuntu 14.04 "trusty"   | i386     | netpoldo-ubuntu-14.04.1-53-i386.tar.gz
+  Ubuntu 14.04 "trusty"   | amd64    | netpoldo-ubuntu-14.04.1-53-amd64.tar.gz
+  Ubuntu 12.04 "precise"  | i386     | netpoldo-ubuntu-12.04.5-53-i386.tar.gz
+  Ubuntu 12.04 "precise"  | amd64    | netpoldo-ubuntu-12.04.5-53-amd64.tar.gz
+  Ubuntu 10.04 "lucid"    | i386     | netpoldo-ubuntu-10.04.5-53-i386.tar.gz
+  Ubuntu 10.04 "lucid"    | amd64    | netpoldo-ubuntu-10.04.5-53-amd64.tar.gz
 ````
 
 
@@ -109,18 +109,18 @@ image:
 ````
   Version              | Local  | Integrated | Net
  ----------------------|--------|------------|--------
-  Debian 8 - i386      |  97.9M |     211.2M | 100.4M
-  Debian 8 - amd64     | 120.4M |     232.5M | 123.4M
-  Debian 7 - i386      |  82.8M |     183.4M |  84.1M
-  Debian 7 - amd64     | 103.4M |     203.6M | 105.4M
-  Debian 6 - i386      |  72.7M |     154.4M |  79.6M
-  Debian 6 - amd64     |  91.4M |     174.7M |  98.0M
-  Ubuntu 14.04 - i386  | 109.8M |     235.4M | 109.5M
-  Ubuntu 14.04 - amd64 | 109.8M |     234.8M | 109.5M
-  Ubuntu 12.04 - i386  |  92.0M |     190.4M |  90.9M
-  Ubuntu 12.04 - amd64 | 118.7M |     220.4M | 116.4M
-  Ubuntu 10.04 - i386  |  80.4M |     171.8M |  81.6M
-  Ubuntu 10.04 - amd64 | 115.1M |     207.6M | 114.3M
+  Debian 8 - i386      | 119.1M |     231.9M | 117.9M
+  Debian 8 - amd64     | 142.5M |     253.3M | 137.5M
+  Debian 7 - i386      |  83.6M |     183.5M |  86.1M
+  Debian 7 - amd64     | 103.4M |     204.5M | 105.5M
+  Debian 6 - i386      |  72.0M |     154.6M |  78.9M
+  Debian 6 - amd64     |  92.2M |     174.8M |  99.3M
+  Ubuntu 14.04 - i386  | 107.2M |     237.6M | 107.2M
+  Ubuntu 14.04 - amd64 | 140.5M |     272.8M | 140.7M
+  Ubuntu 12.04 - i386  |  92.4M |     190.7M |  92.9M
+  Ubuntu 12.04 - amd64 | 118.6M |     220.2M | 119.1M
+  Ubuntu 10.04 - i386  |  80.8M |     172.5M |  82.0M
+  Ubuntu 10.04 - amd64 | 116.9M |     208.4M | 117.2M
 ````
 
 The following method was used:
