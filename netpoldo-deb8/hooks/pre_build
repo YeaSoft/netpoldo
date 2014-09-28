@@ -28,4 +28,4 @@ Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
 permitted by applicable law.
 
 EOF
-) > "${UIC_WP_ROOTFS}/etc/motd.tail"
+) > "${UIC_WP_ROOTFS}/etc/motd"
