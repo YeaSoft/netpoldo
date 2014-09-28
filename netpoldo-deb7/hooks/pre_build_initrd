@@ -11,7 +11,7 @@
 if [ "${UIC_BUILDNAME}" = "netpoldo-integrated" ]; then
 	# test if the squash filesystem is available
 	if [ -f "${UIC_WP_OUTPUT}/netpoldo.squashfs" ]; then
-		cp "${UIC_WP_OUTPUT}/netpoldo.squashfs"	"${TARGET}/chroot"
+		cp "${UIC_WP_OUTPUT}/netpoldo.squashfs"	"${UIC_WP_ROOTFS}"
 	else
 		show_error "Missing netpoldo.squashfs"
 		exit 2
@@ -20,8 +20,8 @@ fi
 
 # fix the ugly bug with synbolic links to absolute oathnames on root
 for linked_object in initrd.img libnss3.so vmlinuz; do
-	LINKFILE="${UIC_WPS_ROOTFS}/${linked_object}"
-	if [ -l "${LINKFILE}" ]; then
+	LINKFILE="${UIC_WP_ROOTFS}/${linked_object}"
+	if [ -h "${LINKFILE}" ]; then
 		LINKPATH=$(readlink "${LINKFILE}")
 		if [ "${LINKPATH:0:1}" = "/" ]; then
 			# oh yea! It's a f...... absolute link....
