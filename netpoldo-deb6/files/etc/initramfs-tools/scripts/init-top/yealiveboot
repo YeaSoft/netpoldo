@@ -1,13 +1,15 @@
 #!/bin/sh
 #
-# (c) 2012 YeaSoft Int'l - Leo Moll
+# (c) 2012-2015 YeaSoft Int'l - Leo Moll
+#
+# This script is part of the YeaSoft initramfs live system
+# configuration
 #
 # This initramfs script implements support for a loop filesystem
 # in local rootfs environments.
 # This part is executed at the BEGIN of the "init" script sequence
 #
-# Version: 20130314
-# Compatibility: wheezy(i386,amd64) squeeze(i386,amd64)
+# Version: 20150912
 
 PREREQ=""
 prereqs()
@@ -23,7 +25,20 @@ prereqs)
         ;;
 esac
 
+# Ubuntu already processes loop file system mount in the default init script
+if [ "${YEABOOT_VENDOR}" = "Ubuntu" ]; then
+	exit 0
+fi
+
+# prevent multiple execution
+if [ -f /tmp/yealiveboot.init-top ]; then
+	return 0
+else
+	touch /tmp/yealiveboot.init-top
+fi
+
 . ./scripts/functions
+
 
 [ "$quiet" != "y" ] && log_begin_msg "Parsing LOOP specific parameters..."
 # Parse command line options

@@ -1,14 +1,16 @@
 #!/bin/sh
 #
-# (c) 2014 YeaSoft Int'l - Leo Moll
+# (c) 2014-2015 YeaSoft Int'l - Leo Moll
+#
+# This script is part of the YeaSoft initramfs live system
+# configuration
 #
 # This initramfs script implements support for root filesystem
 # autodetection without casper.
 # This part is executed at the BEGIN of the "local" root mount
 # operation
 #
-# Version: 20140516
-# Compatibility: jessie(i386,amd64) trusty(i386,amd64)
+# Version: 20150912
 
 PREREQ=""
 prereqs()
@@ -24,6 +26,13 @@ prereqs)
         ;;
 esac
 
+# prevent multiple execution
+if [ -f /tmp/yealiveboot.local-top ]; then
+	return 0
+else
+	touch /tmp/yealiveboot.local-top
+fi
+
 . ./scripts/functions
 
 tried=/tmp/tried
@@ -35,19 +44,33 @@ is_loop_path() {
 	return 1
 }
 
-
 is_nice_device() {
 	sysfs_path="${1#/sys}"
 
-	if udevadm info --query=all --path="${sysfs_path}" | egrep -q "DEVTYPE=disk"; then
-		return 0
-	elif echo "${sysfs_path}" | grep -q '^/block/vd[a-z]$'; then
-		return 0
-	elif echo "${sysfs_path}" | grep -q "^/block/dm-"; then
-		return 0
-	elif echo "${sysfs_path}" | grep -q "^/block/mtdblock"; then
-		return 0
-	fi
+	case "${YEABOOT_GENERATION}" in
+	2010)	if /lib/udev/path_id "${sysfs_path}" | egrep -q "ID_PATH=(usb|pci-[^-]*-(ide|scsi|usb)|platform-orion-ehci|platform-mmc|platform-mxsdhci)"; then
+			return 0
+		elif echo ${sysfs_path} | grep -q "^/block/dm-"; then
+			return 0
+		fi
+		;;
+	2012)	if /sbin/udevadm test-builtin path_id "${sysfs_path}" | egrep -q "ID_PATH=(usb|pci-[^-]*-(ide|sas|scsi|usb|virtio)|platform-sata_mv|platform-orion-ehci|platform-mmc|platform-mxsdhci|platform-omap_hsmmc|platform-sdhci-tegra)"; then
+			return 0
+		elif echo ${sysfs_path} | grep -q "^/block/dm-"; then
+			return 0
+		fi
+		;;
+	2014)	if udevadm info --query=all --path="${sysfs_path}" | egrep -q "DEVTYPE=disk"; then
+			return 0
+		elif echo "${sysfs_path}" | grep -q '^/block/vd[a-z]$'; then
+			return 0
+		elif echo "${sysfs_path}" | grep -q "^/block/dm-"; then
+			return 0
+		elif echo "${sysfs_path}" | grep -q "^/block/mtdblock"; then
+			return 0
+		fi
+		;;
+	esac
 	return 1
 }
 
@@ -149,7 +172,10 @@ find_livefs() {
 	return 1
 }
 
-if [ "${ROOT}" = "/dev/detect" ]; then
+# trigger the detection by specifying root=/dev/detect - if the boot script is
+# "local", the autodetection is triggered by default if no device was specified
+# for root
+if [ "${ROOT}" = "/dev/detect" ] || [ "${BOOT}" = "local" -a -z "${ROOT}" ]; then
 	[ "$quiet" != "y" ] && log_begin_msg "Detecting root device for loop mount..."
 
 	trycount=0

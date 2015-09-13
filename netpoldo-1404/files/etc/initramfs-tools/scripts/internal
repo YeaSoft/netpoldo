@@ -1,25 +1,51 @@
-# internal filesystem mounting			-*- shell-script -*-
+#!/bin/sh
+#
+# (c) 2012-2015 YeaSoft Int'l - Leo Moll
+#
+# This script is part of the YeaSoft initramfs live system
+# configuration
+#
+# This initramfs script implements support booting a branch
+# filesystem with the static component "self contained" in
+# the initramfs.
+#
+# Version: 20150913
+
+local_top()
+{
+	if [ "${local_top_used}" != "yes" ]; then
+		[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/local-top"
+		run_scripts /scripts/local-top
+		[ "$quiet" != "y" ] && log_end_msg
+	fi
+	local_top_used=yes
+}
+
+local_premount()
+{
+	if [ "${local_premount_used}" != "yes" ]; then
+		[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/local-premount"
+		run_scripts /scripts/local-premount
+		[ "$quiet" != "y" ] && log_end_msg
+	fi
+	local_premount_used=yes
+}
+
+local_bottom()
+{
+	if [ "${local_premount_used}" = "yes" ] || [ "${local_top_used}" = "yes" ]; then
+		[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/local-bottom"
+		run_scripts /scripts/local-bottom
+		[ "$quiet" != "y" ] && log_end_msg
+	fi
+	local_premount_used=no
+	local_top_used=no
+}
+
 
 # Parameter: Where to mount the filesystem
-mountroot ()
+internal_mount_root()
 {
-	[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/local-top"
-	run_scripts /scripts/local-top
-	[ "$quiet" != "y" ] && log_end_msg
-
-	[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/local-premount"
-	run_scripts /scripts/local-premount
-	[ "$quiet" != "y" ] && log_end_msg
-
-
-	if [ -z "$LOOP" ]; then
-		panic "
-Could not mount the root filesystem.
-The internal boot method requires a loop file system to be present in the
-initial ramdisk.
-"
-	fi
-
 	if [ "$LOOP" ]; then
 
 		while [ ! -e "/${LOOP#/}" ]; do
@@ -49,9 +75,39 @@ initial ramdisk.
 
 		# FIXME This has no error checking
 		mount ${roflag} -o loop -t ${FSTYPE} ${LOOPFLAGS} "/${LOOP#/}" ${rootmnt}
-	fi
 
-	[ "$quiet" != "y" ] && log_begin_msg "Running /scripts/local-bottom"
-	run_scripts /scripts/local-bottom
-	[ "$quiet" != "y" ] && log_end_msg
+	else
+		panic "
+Could not mount the root filesystem.
+The internal boot method requires a loop file system to be present in the
+initial ramdisk.
+"
+	fi
 }
+
+mountroot()
+{
+	local_top
+	local_premount
+	internal_mount_root
+	local_bottom
+}
+
+mount_top()
+{
+	# Note, also called directly in case it's overridden.
+	local_top
+}
+
+mount_premount()
+{
+	# Note, also called directly in case it's overridden.
+	local_premount
+}
+
+mount_bottom()
+{
+	# Note, also called directly in case it's overridden.
+	local_bottom
+}
+
