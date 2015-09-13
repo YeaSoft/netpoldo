@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-# (c) 2008-2010 YeaSoft Int'l - Leo Moll
+# (c) 2008-2015 YeaSoft Int'l - Leo Moll
 #
 # This script creates a new identity for a machine
 
-VERSION=0.3
+VERSION=0.5
 SCRIPTNAME=$(basename $0)
 SCRIPTPATH=$(expr match "$0" '\(.*\)'\/$SCRIPTNAME)
 
@@ -155,17 +155,30 @@ function clear_persist {
 function ssh_keygen {
 	if [ $DOSSHKEY -gt 0 ]; then
 		show_verbose 1 "Creating new ssh identity"
-		rm -f /etc/ssh/ssh_host_*
-		ssh-keygen $SHG_VERBOSITY -C root@$NEWFQDN -b 2048 -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key || test_exec ssh-keygen Failed to generate new RSA keys
-		ssh-keygen $SHG_VERBOSITY -C root@$NEWFQDN -b 1024 -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key || test_exec ssh-keygen Failed to generate new DSA keys
-		/etc/init.d/ssh restart > /dev/null
+		if [ -f /etc/ssh/ssh_host_rsa_key ]; then
+			rm -f /etc/ssh/ssh_host_rsa_key
+			ssh-keygen $SHG_VERBOSITY -C root@$NEWFQDN -b 2048 -N "" -t rsa     -f /etc/ssh/ssh_host_rsa_key     || test_exec ssh-keygen Failed to generate new RSA keys
+		fi
+		if [ -f /etc/ssh/ssh_host_dsa_key ]; then
+			rm -f /etc/ssh/ssh_host_dsa_key
+			ssh-keygen $SHG_VERBOSITY -C root@$NEWFQDN -b 1024 -N "" -t dsa     -f /etc/ssh/ssh_host_dsa_key     || test_exec ssh-keygen Failed to generate new DSA keys
+		fi
+		if [ -f /etc/ssh/ssh_host_ecdsa_key ]; then
+			rm -f /etc/ssh/ssh_host_ecdsa_key
+			ssh-keygen $SHG_VERBOSITY -C root@$NEWFQDN -b  521 -N "" -t ecdsa   -f /etc/ssh/ssh_host_ecdsa_key   || test_exec ssh-keygen Failed to generate new ECDSA keys
+		fi
+		if [ -f /etc/ssh/ssh_host_ed25519_key ]; then
+			rm -f /etc/ssh/ssh_host_ed25519_key
+			ssh-keygen $SHG_VERBOSITY -C root@$NEWFQDN         -N "" -t ed25519 -f /etc/ssh/ssh_host_ed25519_key || test_exec ssh-keygen Failed to generate new ED25519 keys
+		fi
+		service ssh restart > /dev/null
 		SUCCESS=1
 	elif [ "$HOST" != "$NEWHOST" ]; then
 		show_verbose 1 Patching the SSH keys to resemble the new hostname
-		sed -e "s/$HOST/$NEWHOST/g" < /etc/ssh/ssh_host_dsa_key.pub > /etc/ssh/ssh_host_dsa_key.pub.new
-		sed -e "s/$HOST/$NEWHOST/g" < /etc/ssh/ssh_host_rsa_key.pub > /etc/ssh/ssh_host_rsa_key.pub.new
-		mv -f /etc/ssh/ssh_host_dsa_key.pub.new /etc/ssh/ssh_host_dsa_key.pub
-		mv -f /etc/ssh/ssh_host_rsa_key.pub.new /etc/ssh/ssh_host_rsa_key.pub
+		[ -f /etc/ssh/ssh_host_ed25519_key.pub ] && sed -i -e "s/$HOST/$NEWHOST/g" /etc/ssh/ssh_host_ed25519_key.pub
+		[ -f /etc/ssh/ssh_host_ecdsa_key.pub ]   && sed -i -e "s/$HOST/$NEWHOST/g" /etc/ssh/ssh_host_ecdsa_key.pub
+		sed -i -e "s/$HOST/$NEWHOST/g" /etc/ssh/ssh_host_dsa_key.pub
+		sed -i -e "s/$HOST/$NEWHOST/g" /etc/ssh/ssh_host_rsa_key.pub
 		SUCCESS=1
 	fi
 }

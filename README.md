@@ -90,9 +90,9 @@ a specific Debian or Ubuntu version and architecture:
 
  Name          | Based on                    | Architecture
 ---------------|-----------------------------|--------------
- netpoldo-deb8 | Debian 8 Beta (jessie)      | i386, amd64
- netpoldo-deb7 | Debian 7.5.0 (wheezy)       | i386, amd64
- netpoldo-deb6 | Debian 6.0.9 (squeeze)      | i386, amd64
+ netpoldo-deb8 | Debian 8.1 (jessie)         | i386, amd64
+ netpoldo-deb7 | Debian 7.9 (wheezy)         | i386, amd64
+ netpoldo-deb6 | Debian 6.0.10 (squeeze)     | i386, amd64
  netpoldo-1404 | Ubuntu 14.04 LTS (trusty)   | i386, amd64
  netpoldo-1204 | Ubuntu 12.04 LTS (precise)  | i386, amd64
  netpoldo-1004 | Ubuntu 10.04 LTS (lucid)    | i386, amd64
@@ -108,12 +108,12 @@ Although the official NetPoldo binaries will be updated on a more or less
 regular basis, thanks to __UIC__ every user can produce without any effort his
 own up to date binaries without any knowledge about the inner workings. After
 installing __UIC__ the following few commands would produce a fresh, up to date
-version of NetPoldo Wheezy i386:
+version of NetPoldo Jessie i386:
 
 ````
-uic get netpoldo-deb7
-uic create netpoldo-deb7 --variant 32
-uic build netpoldo-deb7
+uic get netpoldo-deb8
+uic create netpoldo-deb8 --variant 32
+uic build netpoldo-deb8
 ````
 
 
