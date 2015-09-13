@@ -18,7 +18,7 @@ if [ "${UIC_BUILDNAME}" = "netpoldo-integrated" ]; then
 	fi
 fi
 
-# fix the ugly bug with synbolic links to absolute oathnames on root
+# fix the ugly bug with synbolic links to absolute pathnames on root
 for linked_object in initrd.img libnss3.so vmlinuz; do
 	LINKFILE="${UIC_WP_ROOTFS}/${linked_object}"
 	if [ -h "${LINKFILE}" ]; then
